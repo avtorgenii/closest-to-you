@@ -1,9 +1,17 @@
 # Setup
-## Poetry
+## Poetry installation
 In base python env (cmd):
 ```bash
 pip install poetry
 ```
+
+## Poetry - if ```pyproject.toml``` exists
+In project root directory:
+```bash
+poetry install
+```
+
+## Poetry - if ```pyproject.toml``` is not present
 Navigate to project folder:
 ```bash
 cd <project_path>
