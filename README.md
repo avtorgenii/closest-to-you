@@ -26,6 +26,7 @@ poetry add django
 ```
 
 To load/setup existing poetry environment for PyCharm project:
+
 To get folder containing environment - in cmd in project directory:
 ```bash
 poetry env info --path
