@@ -6,13 +6,13 @@ pip install poetry
 ```
 
 ## Poetry - if ```pyproject.toml``` exists
-In project root directory:
+In cmd, in project root directory:
 ```bash
 poetry install
 ```
 
 ## Poetry - if ```pyproject.toml``` is not present
-Navigate to project folder:
+In cmd, navigate to project folder:
 ```bash
 cd <project_path>
 ```
