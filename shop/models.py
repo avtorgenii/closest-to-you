@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import CharField, DecimalField, DateTimeField, ForeignKey, OneToOneField, TextField, IntegerField, \
     FileField, ImageField
+from django.urls import reverse
 
 
 # Users
@@ -51,7 +52,7 @@ class Product(models.Model):
     price = DecimalField(max_digits=19, decimal_places=2)
     image = ImageField(upload_to='products/', default=None, blank=True, null=True)
     discount = DecimalField(max_digits=5, decimal_places=2)
-    above_18_years = models.BooleanField()
+    above_18_years = models.BooleanField(default=False)
 
     category = ForeignKey(ProductCategory, on_delete=models.CASCADE, related_name='products')
     vat = ForeignKey(VAT, on_delete=models.CASCADE)
@@ -86,16 +87,22 @@ class Address(models.Model):
 class DeliveryLeavePlace(models.Model):
     name = CharField(max_length=255, unique=True)
 
+class DeliveryStage(models.Model):
+    name = CharField(max_length=255, unique=True)
 
 class Delivery(models.Model):
-    delivery_date = DateTimeField()
+    delivery_time = DateTimeField()
 
     order = ForeignKey(Order, on_delete=models.CASCADE)
     address = ForeignKey(Address, on_delete=models.CASCADE)
     delivery_leave_place = ForeignKey(DeliveryLeavePlace, on_delete=models.CASCADE)
+    delivery_stage = ForeignKey(DeliveryStage, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"{self.delivery_date} by {self.order}"
+        return f"{self.delivery_time} by {self.order}"
+
+    def get_absolute_url(self): # used in templates to generate redirect url which will be handled in views
+        return reverse('delivery', kwargs={'d_id': self.pk})
 
 
 class PaymentType(models.Model):
@@ -142,6 +149,9 @@ class Complaint(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self): # used in templates to generate redirect url which will be handled in views
+        return reverse('complaint', kwargs={'c_id': self.pk})
 
 
 class Incident(models.Model):

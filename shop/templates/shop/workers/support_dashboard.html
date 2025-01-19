@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Support Panel</h2>
+
+        <!-- Otrzymane Reklamacje Section -->
+        <div class="card mb-4">
+            <div class="card-header">
+                Received Complaints
+            </div>
+            <div class="list-group list-group-flush">
+                {% for c in complaints %}
+                    <a href="{{ c.get_absolute_url }}" class="list-group-item list-group-item-action">
+                        Complaint #{{ c.pk }} - {{ c.title }}
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Zarządzanie Dostawami Section -->
+        <div class="card">
+            <div class="card-header">
+                Deliveries Management
+            </div>
+            <div class="list-group list-group-flush">
+                {% for d in deliveries %}
+                    <a href="{{ d.get_absolute_url }}" class="list-group-item list-group-item-action">
+                        Delivery #{{ d.pk }} - {{ d.title }}
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

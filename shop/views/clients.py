@@ -1,3 +1,4 @@
 from django.shortcuts import render
 
-# Create your views here.
+def client_dashboard(request):
+    return render(request, 'shop/clients/client_dashboard.html')
