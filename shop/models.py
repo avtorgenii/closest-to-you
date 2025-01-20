@@ -62,14 +62,24 @@ class Product(models.Model):
 
 
 class Order(models.Model):
-    order_date = DateTimeField(auto_now_add=True)
-    total_price = DecimalField(max_digits=10, decimal_places=2)
-    delivery_price = DecimalField(max_digits=10, decimal_places=2)
+    order_date = models.DateTimeField(auto_now_add=True)
+    total_price = models.DecimalField(max_digits=10, decimal_places=2)
+    delivery_price = models.DecimalField(max_digits=10, decimal_places=2)
 
-    client = ForeignKey(Client, on_delete=models.CASCADE)
+    client = models.ForeignKey('Client', on_delete=models.CASCADE, related_name='orders')
+    products = models.ManyToManyField('Product', through='OrderProduct', related_name='orders')
 
     def __str__(self):
         return f"Order {self.id} by {self.client}"
+
+
+class OrderProduct(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name="order_products")
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField()
+
+    def __str__(self):
+        return f"{self.quantity} x {self.product.name} in Order {self.order.id}"
 
 
 # Delivery stuff
@@ -91,15 +101,13 @@ class DeliveryStage(models.Model):
     name = CharField(max_length=255, unique=True)
 
 class Delivery(models.Model):
-    delivery_time = DateTimeField()
+    planned_time = DateTimeField()
+    arrived_time = DateTimeField(null=True, blank=True)
 
-    order = ForeignKey(Order, on_delete=models.CASCADE)
+    order = ForeignKey(Order, on_delete=models.CASCADE, related_name='deliveries')
     address = ForeignKey(Address, on_delete=models.CASCADE)
     delivery_leave_place = ForeignKey(DeliveryLeavePlace, on_delete=models.CASCADE)
     delivery_stage = ForeignKey(DeliveryStage, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return f"{self.delivery_time} by {self.order}"
 
     def get_absolute_url(self): # used in templates to generate redirect url which will be handled in views
         return reverse('delivery', kwargs={'d_id': self.pk})
@@ -144,7 +152,7 @@ class Complaint(models.Model):
 
     complaint_type = ForeignKey(ComplaintType, on_delete=models.CASCADE)
     client = ForeignKey(Client, on_delete=models.CASCADE)
-    worker = ForeignKey(Worker, on_delete=models.CASCADE)
+    worker = ForeignKey(Worker, on_delete=models.CASCADE, null=True, blank=True)
     order = ForeignKey(Order, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):

@@ -12,6 +12,13 @@ urlpatterns = [
 
     # Workers
     path('support_dashboard/',workers.support_dashboard , name='support_dashboard'),
-    path('complaint/<int:c_id>', workers.complaint, name='complaint'),
+
+    # Complaints
+    path('support_dashboard/complaint/<int:c_id>', workers.complaint, name='complaint'),
+    path('support_dashboard/decline_complaint/<int:c_id>', workers.decline_complaint, name='decline_complaint'),
+    path('support_dashboard/accept_complaint/<int:c_id>', workers.accept_complaint, name='accept_complaint'),
+
+
+    # Deliveries
     path('delivery/<int:d_id>', workers.delivery, name='delivery'),
 ]
