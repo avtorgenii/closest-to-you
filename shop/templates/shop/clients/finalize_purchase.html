@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <form method="post" action="{% url 'client_finalize_purchase' %}">
+        {% csrf_token %}
+        <div class="row">
+            <!-- Personal and Address Information -->
+            <div class="col-md-6">
+                <h4 class="mb-3">Dane osobowe i adres</h4>
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <th>Imię</th>
+                            <td><input type="text" name="first_name" class="form-control" required></td>
+                        </tr>
+                        <tr>
+                            <th>Nazwisko</th>
+                            <td><input type="text" name="last_name" class="form-control" required></td>
+                        </tr>
+                        <tr>
+                            <th>Kod pocztowy</th>
+                            <td><input type="text" name="postal_code" class="form-control" required></td>
+                        </tr>
+                        <tr>
+                            <th>Miejscowość</th>
+                            <td><input type="text" name="city" class="form-control" required></td>
+                        </tr>
+                        <tr>
+                            <th>Ulica</th>
+                            <td><input type="text" name="street" class="form-control" required></td>
+                        </tr>
+                        <tr>
+                            <th>Numer domu</th>
+                            <td><input type="text" name="house_number" class="form-control" required></td>
+                        </tr>
+                        <tr>
+                            <th>Numer lokalu</th>
+                            <td><input type="text" name="apartment_number" class="form-control"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Basket Summary -->
+            <div class="col-md-6">
+                <h4 class="mb-3">Podsumowanie koszyka</h4>
+                <table class="table table-bordered">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Produkt</th>
+                            <th>Ilość</th>
+                            <th>Cena</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in basket_items %}
+                        <tr>
+                            <td>{{ item.name }}</td>
+                            <td>{{ item.quantity }}</td>
+                            <td>{{ item.total }} zł</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <p class="text-end"><strong>Zastosowano rabat 10%</strong></p>
+                <p class="text-end"><strong>Kwota do zapłaty: {{ total_price }} zł</strong></p>
+            </div>
+        </div>
+
+        <!-- Payment and Invoice Options -->
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <h4>Metoda płatności</h4>
+                <div class="form-check">
+                    <input type="radio" name="payment_method" value="operator" class="form-check-input" id="operator" checked>
+                    <label class="form-check-label" for="operator">Operator płatności</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" name="payment_method" value="card" class="form-check-input" id="card">
+                    <label class="form-check-label" for="card">Karta kredytowa</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h4>Faktura</h4>
+                <div class="form-check">
+                    <input type="radio" name="invoice" value="no" class="form-check-input" id="invoice-no" checked>
+                    <label class="form-check-label" for="invoice-no">Nie</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" name="invoice" value="yes" class="form-check-input" id="invoice-yes">
+                    <label class="form-check-label" for="invoice-yes">Tak</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="row mt-4">
+            <div class="col text-end">
+                <button type="submit" class="btn btn-primary">Złóż zamówienie</button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

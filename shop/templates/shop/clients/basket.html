@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Twój Koszyk</h2>
+    <form method="post" action="{% url 'client_finalize_purchase' %}">
+        {% csrf_token %}
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead class="table-light">
+                    <tr>
+                        <th>Produkt</th>
+                        <th>Cena</th>
+                        <th>Ilość</th>
+                        <th>Suma</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in basket_items %}
+                    <tr>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.price }} zł</td>
+                        <td>
+                            <input type="number" name="quantity_{{ item.id }}" value="{{ item.quantity }}" min="0" class="form-control form-control-sm" readonly>
+                            <input type="hidden" name="product_id_{{ item.id }}" value="{{ item.id }}">
+                        </td>
+                        <td>{{ item.total }} zł</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="row mt-3">
+            <div class="col text-end">
+                <p><strong>Łączna kwota: {{ total_price }} zł</strong></p>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col text-end">
+                <button type="submit" class="btn btn-primary">Złóż zamówienie</button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
