@@ -105,6 +105,7 @@ class Delivery(models.Model):
     arrived_time = DateTimeField(null=True, blank=True)
 
     order = ForeignKey(Order, on_delete=models.CASCADE, related_name='deliveries')
+    deliverer = ForeignKey(Worker,null=True, blank=True ,on_delete=models.CASCADE, related_name='deliveries')
     address = ForeignKey(Address, on_delete=models.CASCADE)
     delivery_leave_place = ForeignKey(DeliveryLeavePlace, on_delete=models.CASCADE)
     delivery_stage = ForeignKey(DeliveryStage, on_delete=models.CASCADE)

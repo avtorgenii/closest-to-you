@@ -3,7 +3,7 @@ from decimal import Decimal
 
 from django.shortcuts import render, redirect
 
-from shop.models import Complaint, Delivery
+from shop.models import Complaint, Delivery, Product
 
 
 def support_dashboard(request):
@@ -33,6 +33,7 @@ def complaint(request, c_id):
     }
     return render(request, 'shop/workers/complaint.html', context)
 
+
 def decline_complaint(request, c_id):
     complaint = Complaint.objects.get(pk=c_id)
 
@@ -42,6 +43,7 @@ def decline_complaint(request, c_id):
     complaint.save()
 
     return redirect('support_dashboard')
+
 
 def accept_complaint(request, c_id):
     complaint = Complaint.objects.get(pk=c_id)
@@ -67,6 +69,21 @@ def accept_complaint(request, c_id):
     return redirect('support_dashboard')
 
 
-
 def delivery(request, d_id):
-    return None
+    delivery = Delivery.objects.get(pk=d_id)
+    orders = delivery.orders.all()
+    courier = delivery.courier
+    client = orders[0].client
+    products = Product.objects.all()
+
+
+    context = {
+        'd_id': d_id,
+        'delivery': delivery,
+        'orders': orders,
+        'courier': courier,
+        'client': client,
+        'products': products
+    }
+
+    return render(request, 'shop/workers/delivery.html', context)
