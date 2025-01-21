@@ -1,4 +1,5 @@
 from django.contrib.auth.views import LoginView
+from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseNotFound, Http404
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
@@ -26,6 +27,8 @@ class LoginUser(LoginView):
             if worker.role.name == 'Support':
                 return reverse_lazy('support_dashboard')
 
-        raise Http404('Page not found XD')
+        raise PermissionDenied()
 
 
+def home(request):
+    return render(request, 'shop/users/index.html')

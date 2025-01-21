@@ -33,7 +33,7 @@ class Worker(models.Model):
                          related_name='worker_profile')  # User.objects.get(pk=1).worker_profile goes from User to Worker
 
     def __str__(self):
-        return f"Worker: {self.user.first_name} {self.user.last_name} ({self.role})"
+        return f"Worker: {self.user.first_name} {self.user.last_name} ({self.role.name})"
 
 
 # Product stuff
@@ -43,8 +43,10 @@ class VAT(models.Model):
     def __str__(self):
         return f"{self.value}%"
 
+
 class ProductCategory(models.Model):
     name = CharField(max_length=255)
+
 
 class Product(models.Model):
     name = CharField(max_length=255)
@@ -97,20 +99,22 @@ class Address(models.Model):
 class DeliveryLeavePlace(models.Model):
     name = CharField(max_length=255, unique=True)
 
+
 class DeliveryStage(models.Model):
     name = CharField(max_length=255, unique=True)
+
 
 class Delivery(models.Model):
     planned_time = DateTimeField()
     arrived_time = DateTimeField(null=True, blank=True)
 
     order = ForeignKey(Order, on_delete=models.CASCADE, related_name='deliveries')
-    deliverer = ForeignKey(Worker,null=True, blank=True ,on_delete=models.CASCADE, related_name='deliveries')
+    deliverer = ForeignKey(Worker, null=True, blank=True, on_delete=models.CASCADE, related_name='deliveries')
     address = ForeignKey(Address, on_delete=models.CASCADE)
     delivery_leave_place = ForeignKey(DeliveryLeavePlace, on_delete=models.CASCADE)
     delivery_stage = ForeignKey(DeliveryStage, on_delete=models.CASCADE)
 
-    def get_absolute_url(self): # used in templates to generate redirect url which will be handled in views
+    def get_absolute_url(self):  # used in templates to generate redirect url which will be handled in views
         return reverse('delivery', kwargs={'d_id': self.pk})
 
 
@@ -159,7 +163,7 @@ class Complaint(models.Model):
     def __str__(self):
         return self.title
 
-    def get_absolute_url(self): # used in templates to generate redirect url which will be handled in views
+    def get_absolute_url(self):  # used in templates to generate redirect url which will be handled in views
         return reverse('complaint', kwargs={'c_id': self.pk})
 
 

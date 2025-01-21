@@ -8,42 +8,31 @@
         <div class="card">
             <div class="card-body">
                 <h3>Delivery details:</h3>
-                <p><strong>Submit date:</strong> {{ complaint.submission_date }}</p>
-                <p><strong>Complaint type:</strong> {{ complaint.complaint_type.name }}</p>
-                <p><strong>Client:</strong> {{ client.user.first_name }} {{ client.user.last_name }}
+                <p><strong>Planned time:</strong> {{ delivery.planned_time }}</p>
+                <p>
+                    <strong>Address:</strong> {{ delivery.address.postal_code }}, {{ delivery.address.city }}, {{ delivery.address.street }}, {{ delivery.address.house_number }}, {{ delivery.address.apartment_number }}
                 </p>
 
-                {% if order %}
-                    <h4 class="mt-4">Order details:</h4>
-                    <p><strong>Submit date:</strong> {{ order.submit_date }}</p>
-                    <p><strong>Total price:</strong> {{ order.total_price }}</p>
-                    <p><strong>Delivery price:</strong> {{ order.delivery_price }}</p>
 
-                    <h5 class="mt-4">Products:</h5>
-                    <ul>
-                        {% for order_product in order_products %}
-                            <li>
-                                <p><strong>{{ order_product.product.name }}</strong> x {{ order_product.quantity }}</p>
-                            </li>
-                        {% endfor %}
-                    </ul>
+                <h4 class="mt-4">Order details:</h4>
+                <p><strong>Submit date:</strong> {{ order.submit_date }}</p>
+                <p><strong>Total price:</strong> {{ order.total_price }}</p>
+                <p><strong>Delivery price:</strong> {{ order.delivery_price }}</p>
 
-                {% else %}
-                    <h5 class="mt-4">No order linked to the complaint</h5>
-                {% endif %}
-
-                <h5 class="mt-4">Delivery attempts:</h5>
-                <ul class="list-group mb-4">
-                    {% for attempt in deliveries %}
-                        <li class="list-group-item">
-                            <p><strong>Attempt {{ forloop.counter }}</strong></p>
-                            <p><strong>Planned time:</strong> {{ attempt.planned_time }}</p>
-                            <p><strong>Arrived time:</strong> {{ attempt.arrived_time }}</p>
-                            <p><strong>Stage:</strong> {{ attempt.delivery_stage.name }}</p>
-                            <p><strong>Leave place:</strong> {{ attempt.delivery_leave_place.name }}</p>
+                <h5 class="mt-4">Products:</h5>
+                <ul>
+                    {% for order_product in order_products %}
+                        <li>
+                            <p><strong>{{ order_product.product.name }}</strong> x {{ order_product.quantity }}</p>
                         </li>
                     {% endfor %}
                 </ul>
+
+
+                <h4 class="mt-4">Courier</h4>
+                <p><strong>Name:</strong> {{ courier.user.first_name }} {{ courier.user.last_name }}
+                <p><strong>Phone: </strong> {{ deliverer.phone_number }}</p>
+
 
                 {#                {% if not complaint.resolution_date %}#}
                 {#                    <!-- Split form layout -->#}

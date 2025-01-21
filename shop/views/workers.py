@@ -1,11 +1,13 @@
 from datetime import datetime
 from decimal import Decimal
 
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
 from shop.models import Complaint, Delivery, Product
 
 
+@login_required()
 def support_dashboard(request):
     context = {
         'complaints': Complaint.objects.all().order_by('-pk'),
@@ -71,19 +73,18 @@ def accept_complaint(request, c_id):
 
 def delivery(request, d_id):
     delivery = Delivery.objects.get(pk=d_id)
-    orders = delivery.orders.all()
-    courier = delivery.courier
-    client = orders[0].client
-    products = Product.objects.all()
-
+    order = delivery.order
+    order_products = order.order_products.all()
+    courier = delivery.deliverer
+    client = order.client
 
     context = {
         'd_id': d_id,
         'delivery': delivery,
-        'orders': orders,
+        "order": order,
+        "order_products": order_products,
         'courier': courier,
         'client': client,
-        'products': products
     }
 
     return render(request, 'shop/workers/delivery.html', context)

@@ -5,14 +5,15 @@ from shop.views import users, workers, clients
 
 urlpatterns = [
     # USERS
+    path('', users.home, name='home'),
     path('login/', users.LoginUser.as_view(), name='login'),
-    path('logout/', LogoutView.as_view(), name='logout'),  # after logging out see `settings.py` where user will be redirected after
+    path('logout/', LogoutView.as_view(), name='logout'), # after logging out see `settings.py` where user will be redirected after
 
     # CLIENTS
-    path('client_dashboard/',clients.client_dashboard , name='client_dashboard'),
+    path('client_dashboard/', clients.client_dashboard, name='client_dashboard'),
 
     # WORKERS
-    path('support_dashboard/',workers.support_dashboard , name='support_dashboard'),
+    path('support_dashboard/', workers.support_dashboard, name='support_dashboard'),
 
     # Complaints
     path('support_dashboard/complaint/<int:c_id>', workers.complaint, name='complaint'),
