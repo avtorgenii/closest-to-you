@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5 text-center">
+    <h1 class="mb-4">Dziękujemy za zamówienie!</h1>
+    <p class="mb-4">Opłać zamówienie na stronie operatora płatności poprzez poniższy przycisk.</p>
+    
+    <form method="post" action="{% url 'client_process_payment' %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary btn-lg">Przekierowanie do operatora płatności</button>
+    </form>
+</div>
+{% endblock %}

@@ -12,6 +12,8 @@ urlpatterns = [
     # CLIENTS
     path('basket/', clients.client_basket, name='client_dashboard'),
     path('finalize_purchase/', clients.client_finalize_purchase, name='client_finalize_purchase'),
+    path('checkout/', clients.client_checkout, name='client_checkout'),
+    path('process_payment/', clients.process_payment, name='client_process_payment'),
 
     # WORKERS
     path('support_dashboard/', workers.support_dashboard, name='support_dashboard'),

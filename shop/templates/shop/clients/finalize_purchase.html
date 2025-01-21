@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="container mt-4">
-    <form method="post" action="{% url 'client_finalize_purchase' %}">
+    <form method="post" action="{% url 'client_checkout' %}">
         {% csrf_token %}
         <div class="row">
             <!-- Personal and Address Information -->
@@ -105,7 +105,21 @@
                     <label class="form-check-label" for="invoice-no">Nie</label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="invoice" id="invoice_yes" value="yes" data-bs-toggle="modal" data-bs-target="#invoiceModal">
+                    <label for="invoice_yes"></label><input class="form-check-input" type="radio" name="invoice" id="invoice_yes" value="yes" data-bs-toggle="modal" data-bs-target="#invoiceModal" >
+{#                                                            onclick="function validateRequiredFields() {#}
+{#                        const requiredFields = document.querySelectorAll('input[required]');#}
+{#                        let allFilled = true;#}
+{#                        requiredFields.forEach(field => {#}
+{#                            if (!field.value) {#}
+{#                                allFilled = false;#}
+{#                            }#}
+{#                        });#}
+{#                        if (!allFilled) {#}
+{#                            document.getElementById('invoice_yes').checked = false;#}
+{#                            alert('Please fill in all required fields before selecting this option.');#}
+{#                        }#}
+{#                    }#}
+{#                    validateRequiredFields()">#}
                     <label class="form-check-label" for="invoice-yes">Tak</label>
                 </div>
             </div>
@@ -114,7 +128,7 @@
         <!-- Submit Button -->
         <div class="row mt-4">
             <div class="col text-end">
-                <button type="submit" class="btn btn-primary">Złóż zamówienie</button>
+                <button type="submit" class="btn btn-primary">Opłać zamówienie</button>
             </div>
         </div>
     </form>
@@ -141,8 +155,8 @@
                         <input type="text" class="form-control" id="company" name="company" required>
                     </div>
                     <div class="mb-3">
-                        <label for="zip_code" class="form-label">Kod Pocztowy</label>
-                        <input type="text" class="form-control" id="zip_code" name="zip_code" required>
+                        <label for="company_zip_code" class="form-label">Kod Pocztowy</label>
+                        <input type="text" class="form-control" id="company_zip_code" name="zip_code" required>
                     </div>
                     <div class="mb-3">
                         <label for="address" class="form-label">Adres</label>
@@ -152,7 +166,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anuluj</button>
-                <button type="submit" class="btn btn-primary" form="invoiceForm">Złóż zamówienie</button>
+                <button type="submit" class="btn btn-primary" form="invoiceForm">Opłać zamówienie</button>
             </div>
         </div>
     </div>

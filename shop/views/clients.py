@@ -67,3 +67,163 @@ def client_finalize_purchase(request):
         'discount': discount,
         'delivery_leave_places': delivery_leave_places
     })
+
+def client_checkout(request):
+    if request.method == 'POST':
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        postal_code = request.POST.get('postal_code')
+        city = request.POST.get('city')
+        street = request.POST.get('street')
+        house_number = request.POST.get('house_number')
+        apartment_number = request.POST.get('apartment_number')
+        delivery_type = request.POST.get('delivery_type')
+        planned_delivery_time = request.POST.get('planned_delivery_time')
+        payment_method = request.POST.get('payment_method')
+        invoice = request.POST.get('invoice')
+        basket_items = request.POST.get('basket_items')
+        delivery_price = request.POST.get('delivery_price')
+        total_price = request.POST.get('total_price')
+        discount = request.POST.get('discount')
+        delivery_leave_place = request.POST.get('delivery_leave_place')
+
+
+        if payment_method == 'card' and not invoice:
+            return render(request, 'shop/clients/checkout_creditcard.html', {
+                'first_name': first_name,
+                'last_name': last_name,
+                'postal_code': postal_code,
+                'city': city,
+                'street': street,
+                'house_number': house_number,
+                'apartment_number': apartment_number,
+                'delivery_type': delivery_type,
+                'planned_delivery_time': planned_delivery_time,
+                'basket_items': basket_items,
+                'delivery_price': delivery_price,
+                'total_price': total_price,
+                'discount': discount,
+                'delivery_leave_place': delivery_leave_place
+            })
+
+        elif payment_method == 'card' and invoice:
+            return render(request, 'shop/clients/checkout_creditcard.html', {
+                'first_name': first_name,
+                'last_name': last_name,
+                'postal_code': postal_code,
+                'city': city,
+                'street': street,
+                'house_number': house_number,
+                'apartment_number': apartment_number,
+                'delivery_type': delivery_type,
+                'planned_delivery_time': planned_delivery_time,
+                'basket_items': basket_items,
+                'delivery_price': delivery_price,
+                'total_price': total_price,
+                'discount': discount,
+                'delivery_leave_place': delivery_leave_place,
+                'country': request.GET.get('country'),
+                'nip': request.GET.get('nip'),
+                'company': request.GET.get('company'),
+                'company_zip_code': request.GET.get('zip_code'),
+                'address': request.GET.get('address')
+            })
+
+        elif payment_method == 'operator' and invoice:
+            return render(request, 'shop/clients/checkout_transfer.html', {
+                'first_name': first_name,
+                'last_name': last_name,
+                'postal_code': postal_code,
+                'city': city,
+                'street': street,
+                'house_number': house_number,
+                'apartment_number': apartment_number,
+                'delivery_type': delivery_type,
+                'planned_delivery_time': planned_delivery_time,
+                'basket_items': basket_items,
+                'delivery_price': delivery_price,
+                'total_price': total_price,
+                'discount': discount,
+                'delivery_leave_place': delivery_leave_place,
+                'country': request.GET.get('country'),
+                'nip': request.GET.get('nip'),
+                'company': request.GET.get('company'),
+                'company_zip_code': request.GET.get('zip_code'),
+                'address': request.GET.get('address')
+            })
+
+        else:
+            return render(request, 'shop/clients/checkout_transfer.html', {
+                'first_name': first_name,
+                'last_name': last_name,
+                'postal_code': postal_code,
+                'city': city,
+                'street': street,
+                'house_number': house_number,
+                'apartment_number': apartment_number,
+                'delivery_type': delivery_type,
+                'planned_delivery_time': planned_delivery_time,
+                'basket_items': basket_items,
+                'delivery_price': delivery_price,
+                'total_price': total_price,
+                'discount': discount,
+                'delivery_leave_place': delivery_leave_place
+            })
+
+def process_payment(request):
+    if request.method == 'POST':
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        postal_code = request.POST.get('postal_code')
+        city = request.POST.get('city')
+        street = request.POST.get('street')
+        house_number = request.POST.get('house_number')
+        apartment_number = request.POST.get('apartment_number')
+        delivery_type = request.POST.get('delivery_type')
+        planned_delivery_time = request.POST.get('planned_delivery_time')
+        payment_method = request.POST.get('payment_method')
+        invoice = request.POST.get('invoice')
+        basket_items = request.POST.get('basket_items')
+        delivery_price = request.POST.get('delivery_price')
+        total_price = request.POST.get('total_price')
+        discount = request.POST.get('discount')
+        delivery_leave_place = request.POST.get('delivery_leave_place')
+    return render(request, 'shop/clients/checkout.html')
+        # if payment_method == 'card':
+        #     card_number = request.POST.get('card_number')
+        #     card_expiration_date = request.POST.get('card_expiration_date')
+        #     card_cvv = request.POST.get('card_cvv')
+        #
+        #     return render(request, 'shop/clients/payment_success.html', {
+        #         'first_name': first_name,
+        #         'last_name': last_name,
+        #         'postal_code': postal_code,
+        #         'city': city,
+        #         'street': street,
+        #         'house_number': house_number,
+        #         'apartment_number': apartment_number,
+        #         'delivery_type': delivery_type,
+        #         'planned_delivery_time': planned_delivery_time,
+        #         'basket_items': basket_items,
+        #         'delivery_price': delivery_price,
+        #         'total_price': total_price,
+        #         'discount': discount,
+        #         'delivery_leave_place': delivery_leave_place,
+        #         'card_number': card_number,
+        #         'card_expiration_date': card_expiration_date,
+        #         'card_cvv': card_cvv
+        #     })
+        #
+        # elif payment_method == 'transfer':
+        #     return render(request, 'shop/clients/payment_success.html', {
+        #         'first_name': first_name,
+        #         'last_name': last_name,
+        #         'postal_code': postal_code,
+        #         'city': city,
+        #         'street': street,
+        #         'house_number': house_number,
+        #         'apartment_number': apartment_number,
+        #         'delivery_type': delivery_type,
+        #         'planned_delivery_time': planned_delivery_time,
+        #         'basket_items': basket_items,
+        #         'delivery_price': delivery_price,
