@@ -10,6 +10,7 @@ In cmd, in project root directory:
 ```bash
 poetry install
 ```
+Then jump to ```Load existing...``` below
 
 ## Poetry - if ```pyproject.toml``` is not present
 In cmd, navigate to project folder:
@@ -25,7 +26,9 @@ Actually create the environment by installing any package:
 poetry add django
 ```
 
-To load/setup existing poetry environment for PyCharm project:
+Then jump to ```Load existing...``` below
+
+# Load existing poetry environment for PyCharm project:
 
 To get folder containing environment - in cmd in project directory:
 ```bash
