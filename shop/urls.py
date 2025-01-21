@@ -22,4 +22,8 @@ urlpatterns = [
 
     # Deliveries
     path('delivery/<int:d_id>', workers.delivery, name='delivery'),
+    path('confirm_incident/<int:d_id>/', workers.confirm_incident, name='confirm_incident'),
+    path('delivery/courier_compensation/<int:c_id>', workers.courier_compensation, name='courier_compensation'),
+    path('delivery/client_compensation/<int:c_id>', workers.client_compensation, name='client_compensation'),
+    path('delivery/confirm_order_and_delivery/<int:o_id>/<int:d_id>', workers.confirm_order_and_delivery, name='confirm_order_and_delivery')
 ]

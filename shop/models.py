@@ -112,7 +112,7 @@ class Delivery(models.Model):
     deliverer = ForeignKey(Worker, null=True, blank=True, on_delete=models.CASCADE, related_name='deliveries')
     address = ForeignKey(Address, on_delete=models.CASCADE)
     delivery_leave_place = ForeignKey(DeliveryLeavePlace, on_delete=models.CASCADE)
-    delivery_stage = ForeignKey(DeliveryStage, on_delete=models.CASCADE)
+    delivery_stage = ForeignKey(DeliveryStage, on_delete=models.CASCADE, default=1)
 
     def get_absolute_url(self):  # used in templates to generate redirect url which will be handled in views
         return reverse('delivery', kwargs={'d_id': self.pk})
@@ -169,12 +169,13 @@ class Complaint(models.Model):
 
 class Incident(models.Model):
     date = DateTimeField(auto_now_add=True)
-    description = TextField()
-    deliverer_compensation = DecimalField(max_digits=10, decimal_places=2)
+    description = TextField(null=True, blank=True)
+    deliverer_compensation = DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     resolution = TextField(null=True, blank=True)
 
-    deliverer = ForeignKey(Worker, on_delete=models.CASCADE, related_name='deliverer')
-    support_worker = ForeignKey(Worker, on_delete=models.CASCADE, related_name='support_worker')
+    deliverer = ForeignKey(Worker, on_delete=models.CASCADE, related_name='deliverer_incidents')
+    delivery = ForeignKey(Delivery, on_delete=models.CASCADE, related_name='incidents')
+    support_worker = ForeignKey(Worker, on_delete=models.CASCADE, related_name='support_worker_incidents')
 
     def __str__(self):
         return f"Incident on {self.date} reported by {self.deliverer}"
