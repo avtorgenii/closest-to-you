@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 
-from shop.models import Product
+from shop.models import *
 
 
 def client_basket(request):
@@ -54,12 +54,16 @@ def client_basket(request):
 def client_finalize_purchase(request):
     basket = json.loads(request.COOKIES.get('basket_items', '[]'), parse_float=float)
     total_price = float(request.COOKIES.get('total_price', 0))
+    delivery_leave_places = DeliveryLeavePlace.objects.all()
 
+    delivery_price = 7
     discount = 10
-    total_price_after_discount = total_price * (1 - discount / 100)
+    total_price_after_discount = (total_price + delivery_price) * (1 - discount / 100)
 
     return render(request, 'shop/clients/finalize_purchase.html', {
         'basket_items': basket,
         'total_price': total_price_after_discount,
+        'delivery_price': delivery_price,
         'discount': discount,
+        'delivery_leave_places': delivery_leave_places
     })
