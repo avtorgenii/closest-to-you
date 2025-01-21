@@ -1,17 +1,13 @@
 from datetime import datetime
-from decimal import Decimal
+from decimal import Decimal, InvalidOperation
 
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.http import HttpResponse, JsonResponse
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 
-from shop.models import Complaint, Delivery, Product, Incident, Order, OrderProduct, Worker
+from shop.models import Complaint, Delivery, Product, Incident, Order, OrderProduct, Worker, Client
 
-basket = [
-    {'product': 'Milk', 'quantity': 1},
-    {'product': 'Twix', 'quantity': 2},
-]
 
 @login_required()
 def support_dashboard(request):
@@ -27,9 +23,6 @@ def complaint(request, c_id):
     order = complaint.order if hasattr(complaint, 'order') else None
     order_products = order.order_products.all() if order else None
     deliveries = order.deliveries.all() if order else None
-
-    for delivery in deliveries:
-        print(delivery)
 
     context = {
         'c_id': c_id,
@@ -88,6 +81,7 @@ def delivery(request, d_id):
     courier = delivery.deliverer
     client = order.client
     incident = delivery.incidents.last()
+    products = Product.objects.all()
 
     context = {
         'd_id': d_id,
@@ -98,7 +92,7 @@ def delivery(request, d_id):
         'client': client,
         'chat_messages': chat_messages,
         'incident': incident,
-        'basket': basket
+        'products': products
     }
 
     return render(request, 'shop/workers/delivery.html', context)
@@ -117,55 +111,82 @@ def confirm_incident(request, d_id):
 
 @csrf_exempt
 def courier_compensation(request, c_id):
-    print("courier_compensation")
+    compensation = request.POST.get('compensation')
+    try:
+        compensation = Decimal(compensation)
+        if compensation < 0:
+            return JsonResponse({'error': 'Compensation cannot be negative.'}, status=400)
+    except (InvalidOperation, TypeError):
+        return JsonResponse({'error': 'Invalid compensation value.'}, status=400)
+
+    courier = Worker.objects.get(pk=c_id)
+    incident = courier.deliverer_incidents.last()
+    incident.deliverer_compensation += compensation
+    incident.save()
+
     return HttpResponse("Ok", status=200)
 
 
 @csrf_exempt
 def client_compensation(request, c_id):
-    print("client_compensation")
+    compensation = request.POST.get('compensation')
+    try:
+        compensation = Decimal(compensation)
+        if compensation < 0:
+            return JsonResponse({'error': 'Compensation cannot be negative.'}, status=400)
+    except (InvalidOperation, TypeError):
+        return JsonResponse({'error': 'Invalid compensation value.'}, status=400)
+
+    client = Client.objects.get(pk=c_id)
+    client.loyalty_points += compensation
+    client.save()
+
     return HttpResponse("Ok", status=200)
 
 
-def confirm_order_and_delivery(request, o_id, d_id):
+def confirm_order_and_delivery(request, d_id):
     if request.method == "POST":
         # Extract data from the form
         planned_time = request.POST.get('plannedTime')
-        same_deliverer = request.POST.get('deliverer') == 'on'  # Checkbox returns 'on' if checked
+        same_deliverer = request.POST.get('deliverer') == 'on'
         deliverer_id = int(request.POST.get('delivererId'))
         client_id = int(request.POST.get('clientId'))
 
         try:
-            # Parse planned_time to a Python datetime object
             planned_time = datetime.fromisoformat(planned_time) if planned_time else None
 
-            if planned_time:
-                deliverer_id = deliverer_id if same_deliverer else None
+            # Fetch the client and deliverer objects
+            client = get_object_or_404(Client, pk=client_id)
+            deliverer = get_object_or_404(Worker, pk=deliverer_id) if not same_deliverer else get_object_or_404(Worker,
+                                                                                                                pk=deliverer_id)
 
-                # Previous order
-                old_order = Order.objects.get(pk=o_id)
+            # Create a new Order instance
+            order = Order.objects.create(delivery_price=1, client=client)  # hard-coded delivery price
 
-                # Order instance
-                order = Order.objects.create(total_price=15, delivery_price=1, client_id=client_id)
+            # Extract the product quantities from the POST data
+            for product_id, quantity in request.POST.items():
+                if product_id.startswith('product_'):  # products are named as 'product_<product_id>'
+                    product_id = int(product_id.split('_')[1])  # extract product ID
+                    product = get_object_or_404(Product, pk=product_id)
+                    quantity = int(quantity)
 
-                for product_quantity in basket:
-                    product = Product.objects.get(name=product_quantity['product'])
-                    OrderProduct.objects.create(product=product, quantity=product_quantity['quantity'], order=order)
+                    # Create an OrderProduct instance linking the order, product, and quantity
+                    OrderProduct.objects.create(product=product, quantity=quantity, order=order)
 
-                # Previous delivery
-                old_delivery = Delivery.objects.get(pk=d_id)
+            order.update_total_price()  # calculate the total price in the model
 
-                # Delivery instance
-                delivery = Delivery.objects.create(
-                    planned_time=planned_time,
-                    deliverer_id=deliverer_id,
-                    client_id=client_id,
-                    address=old_delivery.address,
-                    delivery_leave_place=old_delivery.delivery_leave_place,
-                    order=order
-                )
+            old_delivery = get_object_or_404(Delivery, pk=d_id)
+
+            Delivery.objects.create(
+                planned_time=planned_time,
+                deliverer=deliverer,
+                address=old_delivery.address,
+                delivery_leave_place=old_delivery.delivery_leave_place,
+                order=order
+            )
 
             return HttpResponse("Order and delivery confirmed!", status=200)
+
         except ValueError as e:
             # Handle invalid datetime format or other issues
             return HttpResponse(f"Invalid data: {e}", status=400)

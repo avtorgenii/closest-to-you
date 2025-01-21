@@ -2,7 +2,12 @@
 
 {% block content %}
     <div class="container mt-5">
-        <h2 class="text-center mb-4">Complaint #{{ complaint.pk }}</h2>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="text-center mb-0">Complaint #{{ complaint.pk }}</h2>
+            <a href="{% url 'support_dashboard' %}" class="btn btn-primary">
+                Go to Support Dashboard
+            </a>
+        </div>
 
         <div class="card">
             <div class="card-body">

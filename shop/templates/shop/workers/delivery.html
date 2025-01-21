@@ -3,7 +3,15 @@
 
 {% block content %}
     <div class="container mt-5">
-        <h2 class="text-center mb-4">Delivery #{{ delivery.pk }}</h2>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="text-center mb-0">Delivery #{{ delivery.pk }}</h2>
+            {% if incident %}
+                <h3 class="mt-3 text-danger">INCIDENT CONFIRMED</h3>
+            {% endif %}
+            <a href="{% url 'support_dashboard' %}" class="btn btn-primary">
+                Go to Support Dashboard
+            </a>
+        </div>
 
         <div class="card">
             <div class="card-body">
@@ -15,7 +23,7 @@
 
 
                 <h4 class="mt-4">Order details:</h4>
-                <p><strong>Submit date:</strong> {{ order.submit_date }}</p>
+                <p><strong>Submit date:</strong> {{ order.order_date }}</p>
                 <p><strong>Total price:</strong> {{ order.total_price }}</p>
                 <p><strong>Delivery price:</strong> {{ order.delivery_price }}</p>
 
@@ -105,36 +113,46 @@
                     </div>
                 </div>
                 <h4 class="mt-4">Create new order and delivery:</h4>
-                <ul>
-                    {% for order_product in basket %}
-                        <li>
-                            <p><strong>{{ order_product.product }}</strong> x {{ order_product.quantity }}</p>
-                        </li>
-                    {% endfor %}
-                </ul>
-                <form id="orderForm" method="post" action="{% url 'confirm_order_and_delivery' order.id delivery.id %}">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        <label for="plannedTime"><strong>Planned time:</strong></label>
-                        <input type="datetime-local" id="plannedTime" name="plannedTime"
-                               class="form-control"
-                               placeholder="Select planned time">
+                <!-- Product Selection Form -->
+                <div class="row mt-3">
+                    <div class="col-md-12">
+                        <form id="productSelectionForm" method="post"
+                              action="{% url 'confirm_order_and_delivery' delivery.id %}">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="products"><strong>Choose Products:</strong></label>
+                                <div id="product-selection-list">
+                                    {% for product in products %}
+                                        <div class="product-item">
+                                            <label>{{ product.name }}</label>
+                                            <input type="number" name="product_{{ product.id }}" min="1"
+                                                   class="form-control product-quantity" placeholder="Quantity"/>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                            <label for="plannedTime"><strong>Planned time:</strong></label>
+                            <input type="datetime-local" id="plannedTime" name="plannedTime"
+                                   class="form-control"
+                                   placeholder="Select planned time">
 
 
-                        <label for="deliverer"><strong>Same deliverer?: </strong></label>
-                        <input type="checkbox" id="sameDeliverer" name="deliverer"
-                               class="form-check-input" checked>
+                            <label for="deliverer"><strong>Same deliverer?: </strong></label>
+                            <input type="checkbox" id="sameDeliverer" name="deliverer"
+                                   class="form-check-input" checked>
 
+                            <input type="hidden" id="delivererId" name="delivererId" value="{{ courier.pk }}">
+                            <input type="hidden" id="clientId" name="clientId" value="{{ client.pk }}">
+
+                            <div class="form-group mt-3">
+                                <button type="submit" class="btn btn-success btn-block">
+                                    Submit Order
+                                </button>
+                            </div>
+                        </form>
                     </div>
-                    <div class="form-group mt-3">
-                        <button type="submit" name="action" value="accept"
-                                class="btn btn-success btn-block">
-                            Submit order
-                        </button>
-                    </div>
-                    <input type="hidden" id="delivererId" name="delivererId" value="{{ courier.pk }}">
-                    <input type="hidden" id="clientId" name="clientId" value="{{ client.pk }}">
-                </form>
+                </div>
                 </div>
                 </div>
             </div>

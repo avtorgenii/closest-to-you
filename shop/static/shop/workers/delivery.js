@@ -1,3 +1,4 @@
+// Incident block showing
 document.addEventListener("DOMContentLoaded", function () {
     const button = document.getElementById("confirm-button");
     const hiddenDiv = document.getElementById("incident-block");
@@ -10,13 +11,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Show the hidden div
         hiddenDiv.removeAttribute("hidden");
-
-
-        // BACKEND
-
     });
 });
 
+// Compensations
 $(document).ready(function () {
     // Courier form submission
     $('#courierForm').on('submit', function (e) {
@@ -26,6 +24,7 @@ $(document).ready(function () {
         $.ajax({
             type: form.attr('method'),
             url: form.attr('action'),
+            data: form.serialize(),
             success: function (response) {
                 // Handle success (you can update the UI or show a message)
                 alert('Courier compensation accepted!');
@@ -45,6 +44,7 @@ $(document).ready(function () {
         $.ajax({
             type: form.attr('method'),
             url: form.attr('action'),
+            data: form.serialize(),
             success: function (response) {
                 // Handle success (you can update the UI or show a message)
                 alert('Client compensation accepted!');
@@ -57,6 +57,7 @@ $(document).ready(function () {
     });
 });
 
+// Incident confirmation
 document.getElementById("confirm-button").addEventListener("click", function () {
     const deliveryId = this.getAttribute("data-delivery-id");
 
@@ -78,4 +79,24 @@ document.getElementById("confirm-button").addEventListener("click", function () 
             console.error("Error:", error);
             alert("An unexpected error occurred.");
         });
+});
+
+// Order creation
+$(document).ready(function () {
+    // Validate and handle product quantity input
+    $("#productSelectionForm").submit(function (e) {
+        let isValid = false;
+
+        // Check if any product has a quantity input greater than 0
+        $(".product-quantity").each(function () {
+            if ($(this).val() > 0) {
+                isValid = true;
+            }
+        });
+
+        if (!isValid) {
+            alert("Please select at least one product with a quantity.");
+            e.preventDefault(); // Prevent form submission if no product is selected
+        }
+    });
 });

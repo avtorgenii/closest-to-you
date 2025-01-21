@@ -53,7 +53,7 @@ class Product(models.Model):
     description = TextField(null=True, blank=True)
     price = DecimalField(max_digits=19, decimal_places=2)
     image = ImageField(upload_to='products/', default=None, blank=True, null=True)
-    discount = DecimalField(max_digits=5, decimal_places=2)
+    discount = DecimalField(max_digits=5, decimal_places=2) # not as percents, but as 0.2 and 0.05 an etc
     above_18_years = models.BooleanField(default=False)
 
     category = ForeignKey(ProductCategory, on_delete=models.CASCADE, related_name='products')
@@ -65,7 +65,7 @@ class Product(models.Model):
 
 class Order(models.Model):
     order_date = models.DateTimeField(auto_now_add=True)
-    total_price = models.DecimalField(max_digits=10, decimal_places=2)
+    total_price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     delivery_price = models.DecimalField(max_digits=10, decimal_places=2)
 
     client = models.ForeignKey('Client', on_delete=models.CASCADE, related_name='orders')
@@ -73,6 +73,20 @@ class Order(models.Model):
 
     def __str__(self):
         return f"Order {self.id} by {self.client}"
+
+    def update_total_price(self, *args, **kwargs):
+        # Calculate total price from products, considering the discount
+        total_product_price = sum(
+            order_product.product.price * (1 - order_product.product.discount / 100) * order_product.quantity
+            for order_product in self.order_products.all()
+        )
+
+        # Update the total price based on the product prices and the delivery price
+        self.total_price = total_product_price + self.delivery_price
+
+        # Save the order after updating the total price
+        super(Order, self).save(*args, **kwargs)
+
 
 
 class OrderProduct(models.Model):
