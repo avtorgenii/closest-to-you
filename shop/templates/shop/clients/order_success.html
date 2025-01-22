@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5 text-center">
+    <br>
+    <br>
+    <h1 class="mb-4">Zamówienie {{ order_id }} zostało opłacone, zyskano {{ loyalty_points }} punktów lojalnościowych</h1>
+    <br>
+    <h1 class="mb-4">Potwierdzenia płatności zostały wysłane na email.</h1>
+
+    <br>
+    <form method="post" action="{% url 'client_dashboard' %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary btn-lg">Powrót</button>
+    </form>
+</div>
+{% endblock %}

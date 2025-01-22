@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
+    <meta charset="UTF-8">
 <div class="container mt-4">
-    <form method="post" action="{% url 'client_checkout' %}">
+    <form method="post" action="{% url 'client_checkout' %}" id="mainCheckoutForm" accept-charset="UTF-8">
         {% csrf_token %}
         <div class="row">
             <!-- Personal and Address Information -->
@@ -19,7 +20,7 @@
                         </tr>
                         <tr>
                             <th>Kod pocztowy</th>
-                            <td><input type="text" name="postal_code" class="form-control" required></td>
+                            <td><input type="text" name="postal_code" class="form-control" required pattern="[0-9]{2}-[0-9]{3}" title="Format: XX-XXX"></td>
                         </tr>
                         <tr>
                             <th>Miejscowość</th>
@@ -105,22 +106,8 @@
                     <label class="form-check-label" for="invoice-no">Nie</label>
                 </div>
                 <div class="form-check">
-                    <label for="invoice_yes"></label><input class="form-check-input" type="radio" name="invoice" id="invoice_yes" value="yes" data-bs-toggle="modal" data-bs-target="#invoiceModal" >
-{#                                                            onclick="function validateRequiredFields() {#}
-{#                        const requiredFields = document.querySelectorAll('input[required]');#}
-{#                        let allFilled = true;#}
-{#                        requiredFields.forEach(field => {#}
-{#                            if (!field.value) {#}
-{#                                allFilled = false;#}
-{#                            }#}
-{#                        });#}
-{#                        if (!allFilled) {#}
-{#                            document.getElementById('invoice_yes').checked = false;#}
-{#                            alert('Please fill in all required fields before selecting this option.');#}
-{#                        }#}
-{#                    }#}
-{#                    validateRequiredFields()">#}
-                    <label class="form-check-label" for="invoice-yes">Tak</label>
+                    <input type="radio" name="invoice" value="yes" class="form-check-input" id="invoice_yes">
+                    <label class="form-check-label" for="invoice_yes">Tak</label>
                 </div>
             </div>
         </div>
@@ -133,7 +120,9 @@
         </div>
     </form>
 </div>
-    <div class="modal fade" id="invoiceModal" tabindex="-1" aria-labelledby="invoiceModalLabel" aria-hidden="true">
+
+<!-- Invoice Modal -->
+<div class="modal fade" id="invoiceModal" tabindex="-1" aria-labelledby="invoiceModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -141,14 +130,14 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Zamknij"></button>
             </div>
             <div class="modal-body">
-                <form id="invoiceForm">
+                <form id="invoiceForm" accept-charset="UTF-8">
                     <div class="mb-3">
                         <label for="country" class="form-label">Kraj</label>
                         <input type="text" class="form-control" id="country" name="country" required>
                     </div>
                     <div class="mb-3">
                         <label for="nip" class="form-label">Numer NIP</label>
-                        <input type="text" class="form-control" id="nip" name="nip" required>
+                        <input type="text" class="form-control" id="nip" name="nip" required pattern="[0-9]{10}" title="NIP musi składać się z 10 cyfr">
                     </div>
                     <div class="mb-3">
                         <label for="company" class="form-label">Firma</label>
@@ -156,7 +145,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="company_zip_code" class="form-label">Kod Pocztowy</label>
-                        <input type="text" class="form-control" id="company_zip_code" name="zip_code" required>
+                        <input type="text" class="form-control" id="company_zip_code" name="zip_code" required pattern="[0-9]{2}-[0-9]{3}" title="Format: XX-XXX">
                     </div>
                     <div class="mb-3">
                         <label for="address" class="form-label">Adres</label>
@@ -166,9 +155,105 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anuluj</button>
-                <button type="submit" class="btn btn-primary" form="invoiceForm">Opłać zamówienie</button>
+                <button type="submit" class="btn btn-primary" form="invoiceForm">Zatwierdź dane</button>
             </div>
         </div>
     </div>
 </div>
+
+<!-- JavaScript dla obsługi formularza -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Funkcja sprawdzająca czy wszystkie wymagane pola są wypełnione
+    function validateRequiredFields() {
+        const mainForm = document.getElementById('mainCheckoutForm');
+        const requiredFields = mainForm.querySelectorAll('input[required], select[required]');
+        let allFilled = true;
+
+        requiredFields.forEach(field => {
+            if (!field.value.trim()) {
+                allFilled = false;
+            }
+        });
+
+        return allFilled;
+    }
+
+    // Inicjalizacja zmiennych i elementów
+    const invoiceRadioYes = document.getElementById('invoice_yes');
+    const invoiceRadioNo = document.getElementById('invoice-no');
+    const invoiceModal = new bootstrap.Modal(document.getElementById('invoiceModal'));
+    const mainForm = document.getElementById('mainCheckoutForm');
+
+    // Obsługa kliknięcia w radio button faktury
+    invoiceRadioYes.addEventListener('change', function(e) {
+        if (!validateRequiredFields()) {
+            e.preventDefault();
+            invoiceRadioNo.checked = true;
+            alert('Proszę wypełnić wszystkie wymagane pola przed wyborem faktury.');
+            return;
+        }
+        invoiceModal.show();
+    });
+
+    // Obsługa zamknięcia modalu
+    document.getElementById('invoiceModal').addEventListener('hidden.bs.modal', function () {
+        if (!document.getElementById('mainCheckoutForm').dataset.invoiceSubmitted) {
+            invoiceRadioNo.checked = true;
+        }
+    });
+
+    // Obsługa formularza faktury
+    document.getElementById('invoiceForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // Sprawdź walidację formularza faktury
+        const invoiceForm = this;
+        if (!invoiceForm.checkValidity()) {
+            invoiceForm.reportValidity();
+            return;
+        }
+
+        // Usuń poprzednie ukryte pola faktury (jeśli istnieją)
+        const existingHiddenInputs = mainForm.querySelectorAll('input[type="hidden"][name^="invoice_"]');
+        existingHiddenInputs.forEach(input => input.remove());
+
+        // Zbierz dane z formularza faktury i dodaj je z prefixem "invoice_"
+        const formData = new FormData(this);
+        for (let [key, value] of formData.entries()) {
+            const hiddenInput = document.createElement('input');
+            hiddenInput.type = 'hidden';
+            hiddenInput.name = 'invoice_' + key;  // Dodaj prefix "invoice_"
+            hiddenInput.value = value;
+            mainForm.appendChild(hiddenInput);
+        }
+
+        // Oznacz, że formularz faktury został zatwierdzony
+        mainForm.dataset.invoiceSubmitted = 'true';
+        invoiceRadioYes.checked = true;
+
+        // Zamknij modal
+        invoiceModal.hide();
+    });
+
+    // Obsługa przycisku Anuluj w modalu
+    document.querySelector('[data-bs-dismiss="modal"]').addEventListener('click', function() {
+        mainForm.dataset.invoiceSubmitted = 'false';
+        invoiceRadioNo.checked = true;
+
+        // Usuń ukryte pola faktury przy anulowaniu
+        const existingHiddenInputs = mainForm.querySelectorAll('input[type="hidden"][name^="invoice_"]');
+        existingHiddenInputs.forEach(input => input.remove());
+    });
+
+    // Obsługa głównego formularza
+    mainForm.addEventListener('submit', function(e) {
+        if (!validateRequiredFields()) {
+            e.preventDefault();
+            alert('Proszę wypełnić wszystkie wymagane pola.');
+            return;
+        }
+    });
+});
+</script>
 {% endblock %}
