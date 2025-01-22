@@ -123,7 +123,7 @@ class Delivery(models.Model):
     planned_time = DateTimeField()
     arrived_time = DateTimeField(null=True, blank=True)
 
-    order = ForeignKey(Order, on_delete=models.CASCADE, related_name='deliveries')
+    order = OneToOneField(Order, on_delete=models.CASCADE, related_name='delivery')
     deliverer = ForeignKey(Worker, null=True, blank=True, on_delete=models.CASCADE, related_name='deliveries')
     address = ForeignKey(Address, on_delete=models.CASCADE)
     delivery_leave_place = ForeignKey(DeliveryLeavePlace, on_delete=models.CASCADE)
@@ -185,7 +185,7 @@ class Complaint(models.Model):
 class Incident(models.Model):
     date = DateTimeField(auto_now_add=True)
     description = TextField(null=True, blank=True)
-    deliverer_compensation = DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    deliverer_compensation = DecimalField(max_digits=10, decimal_places=2, default=0)
     resolution = TextField(null=True, blank=True)
 
     deliverer = ForeignKey(Worker, on_delete=models.CASCADE, related_name='deliverer_incidents')

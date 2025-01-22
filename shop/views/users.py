@@ -27,7 +27,7 @@ class LoginUser(LoginView):
             if worker.role.name == 'Support':
                 return reverse_lazy('support_dashboard')
 
-        raise PermissionDenied()
+        return reverse_lazy('home')
 
 
 def home(request):

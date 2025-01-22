@@ -36,17 +36,14 @@
                     <h5 class="mt-4">No order linked to the complaint</h5>
                 {% endif %}
 
-                <h5 class="mt-4">Delivery attempts:</h5>
+                <h5 class="mt-4">Delivery:</h5>
                 <ul class="list-group mb-4">
-                    {% for attempt in deliveries %}
                         <li class="list-group-item">
-                            <p><strong>Attempt {{ forloop.counter }}</strong></p>
-                            <p><strong>Planned time:</strong> {{ attempt.planned_time }}</p>
-                            <p><strong>Arrived time:</strong> {{ attempt.arrived_time }}</p>
-                            <p><strong>Stage:</strong> {{ attempt.delivery_stage.name }}</p>
-                            <p><strong>Leave place:</strong> {{ attempt.delivery_leave_place.name }}</p>
+                            <p><strong>Planned time:</strong> {{ delivery.planned_time }}</p>
+                            <p><strong>Arrived time:</strong> {{ delivery.arrived_time }}</p>
+                            <p><strong>Stage:</strong> {{ delivery.delivery_stage.name }}</p>
+                            <p><strong>Leave place:</strong> {{ delivery.delivery_leave_place.name }}</p>
                         </li>
-                    {% endfor %}
                 </ul>
 
                 {% if not complaint.resolution_date %}
