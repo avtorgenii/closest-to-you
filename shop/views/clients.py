@@ -233,7 +233,7 @@ def process_payment(request):
             postal_code=postal_code
         )
         delivery_leave_place = DeliveryLeavePlace.objects.get(id=delivery_leave_place)
-        delivery_stage = DeliveryStage.objects.get(id=4)
+        delivery_stage = DeliveryStage.objects.get(id=1)
 
 
         Delivery.objects.create(
