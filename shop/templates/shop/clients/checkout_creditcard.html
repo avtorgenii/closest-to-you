@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Dziękujemy za zamówienie!</h1>
+    <p class="text-center mb-4">Opłać zamówienie, wypełniając dane karty kredytowej.</p>
+
+    <form method="post" action="{% url 'client_process_payment' %}">
+        {% csrf_token %}
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="card_number" class="form-label">Numer karty kredytowej</label>
+                    <input type="text" class="form-control" id="card_number" name="card_number" maxlength="16" pattern="\d{16}" placeholder="Wprowadź 16 cyfr" required>
+                    <div class="form-text">Wprowadź dokładnie 16 cyfr.</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="expiry_date" class="form-label">Data ważności</label>
+                    <input type="month" class="form-control" id="expiry_date" name="expiry_date" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="cvv" class="form-label">Numer CVV</label>
+                    <input type="text" class="form-control" id="cvv" name="cvv" maxlength="3" pattern="\d{3}" placeholder="Wprowadź 3 cyfry" required>
+                    <div class="form-text">Wprowadź dokładnie 3 cyfry.</div>
+                </div>
+
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary">Zapłać</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
