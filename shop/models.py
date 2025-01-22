@@ -11,6 +11,7 @@ from django.urls import reverse
 class Client(models.Model):
     phone_number = CharField(max_length=255, unique=True)
     loyalty_points = DecimalField(max_digits=10, decimal_places=2, default=0)
+    compensations = DecimalField(max_digits=10, decimal_places=2, default=0)
 
     user = OneToOneField(User, on_delete=models.CASCADE, related_name='client_profile')
 

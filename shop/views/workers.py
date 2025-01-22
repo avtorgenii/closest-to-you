@@ -62,7 +62,7 @@ def accept_complaint(request, c_id):
     is_refund = 'refund' in request.POST
     refund = Decimal(complaint.order.total_price) if is_refund else Decimal(0)
 
-    complaint.client.loyalty_points += (compensation + refund)
+    complaint.client.compensations += (compensation + refund)
 
     complaint.client.save()
     complaint.save()
@@ -138,7 +138,7 @@ def client_compensation(request, c_id):
         return JsonResponse({'error': 'Invalid compensation value.'}, status=400)
 
     client = Client.objects.get(pk=c_id)
-    client.loyalty_points += compensation
+    client.compensations += compensation
     client.save()
 
     return HttpResponse("Ok", status=200)
