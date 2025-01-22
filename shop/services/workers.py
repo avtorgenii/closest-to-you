@@ -91,7 +91,7 @@ def recreate_order_and_delivery(old_delivery_id, planned_time_str, same_delivere
     if same_deliverer:
         deliverer = old_delivery.deliverer
     else:
-        deliverer = Worker.objects.get(pk=deliverer_id)
+        deliverer = None
 
     new_delivery = Delivery.objects.create(
         planned_time=planned_time,
