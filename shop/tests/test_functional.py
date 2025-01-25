@@ -1,8 +1,7 @@
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from model_bakery import baker
-import time
+from selenium.webdriver.edge.options import Options as EdgeOptions
 from django.contrib.auth import get_user_model
 from model_bakery import baker
 
@@ -64,8 +63,11 @@ class Test2(StaticLiveServerTestCase):
 
 
     # Driver setup
-    self.driver = webdriver.Edge()
-    self.driver.implicitly_wait(2)
+    edge_options = EdgeOptions()
+    edge_options.add_argument('--force-device-scale-factor=0.8')  # 80% zoom
+
+    # Initialize driver with options
+    self.driver = webdriver.Edge(options=edge_options)
     self.driver.set_window_size(945, 1080)
     self.driver.get(self.live_server_url)
   
