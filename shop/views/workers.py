@@ -8,6 +8,17 @@ from shop.services import *
 
 
 def is_support_worker(user):
+    """Check if user is authenticated support worker.
+
+        Args:
+            user (User): Django user object to check
+
+        Returns:
+            bool: True if valid support worker
+
+        Raises:
+            PermissionDenied: If user is not worker or doesn't have Support role
+        """
     if not user.is_authenticated:
        return False # redirects to login
     if not hasattr(user, 'worker_profile'):
@@ -19,6 +30,14 @@ def is_support_worker(user):
 
 @user_passes_test(is_support_worker)
 def support_dashboard(request):
+    """Display support worker dashboard with recent complaints and deliveries.
+
+        Args:
+            request (HttpRequest): Standard request object
+
+        Returns:
+            HttpResponse: Rendered dashboard template with context
+        """
     context = {
         'complaints': Complaint.objects.all().order_by('-pk'),
         'deliveries': Delivery.objects.all().order_by('-pk'),
@@ -28,8 +47,18 @@ def support_dashboard(request):
 
 @user_passes_test(is_support_worker)
 def complaint(request, c_id):
+    """Display detailed view of a specific complaint.
+
+        Args:
+            request (HttpRequest): Standard request object
+            c_id (int): Complaint ID from URL
+
+        Returns:
+            HttpResponse: Rendered complaint detail template
+        """
     complaint = get_object_or_404(Complaint, pk=c_id)
     order = complaint.order if hasattr(complaint, 'order') else None
+    print(order)
     order_products = order.order_products.all() if order else None
     delivery = order.delivery if order else None
 
@@ -46,6 +75,15 @@ def complaint(request, c_id):
 
 @user_passes_test(is_support_worker)
 def decline_complaint(request, c_id):
+    """Process complaint decline with resolution text.
+
+        Args:
+            request (HttpRequest): Contains POST data with response
+            c_id (int): Complaint ID to decline
+
+        Returns:
+            HttpResponseRedirect: Redirect to support dashboard
+        """
     complaint = get_object_or_404(Complaint, pk=c_id)
     decline_complaint_service(
         complaint=complaint,
@@ -57,6 +95,15 @@ def decline_complaint(request, c_id):
 
 @user_passes_test(is_support_worker)
 def accept_complaint(request, c_id):
+    """Accept complaint and apply compensation/refund.
+
+        Args:
+            request (HttpRequest): Contains POST data with compensation details
+            c_id (int): Complaint ID to accept
+
+        Returns:
+            HttpResponseRedirect: Redirect to support dashboard
+        """
     complaint = get_object_or_404(Complaint, pk=c_id)
     accept_complaint_service(
         complaint=complaint,
@@ -69,6 +116,15 @@ def accept_complaint(request, c_id):
 
 @user_passes_test(is_support_worker)
 def delivery(request, d_id):
+    """Display delivery details and related order information.
+
+        Args:
+            request (HttpRequest): Standard request object
+            d_id (int): Delivery ID from URL
+
+        Returns:
+            HttpResponse: Rendered delivery detail template
+        """
     delivery = get_object_or_404(Delivery, pk=d_id)
     order = delivery.order
     incident = delivery.incidents.last()
@@ -90,6 +146,15 @@ def delivery(request, d_id):
 
 @user_passes_test(is_support_worker)
 def confirm_incident(request, d_id):
+    """Create new incident record for delivery.
+
+        Args:
+            request (HttpRequest): Unused but required
+            d_id (int): Delivery ID to associate with incident
+
+        Returns:
+            HttpResponse: Plain text OK response
+        """
     delivery = get_object_or_404(Delivery, pk=d_id)
     create_incident(delivery=delivery, support_worker=request.user.worker_profile)
     return HttpResponse("Ok", status=200)
@@ -98,6 +163,17 @@ def confirm_incident(request, d_id):
 @user_passes_test(is_support_worker)
 @csrf_exempt
 def courier_compensation(request, c_id):
+    """Handle AJAX request for courier compensation.
+
+       Args:
+           request (HttpRequest): POST request with compensation amount
+           c_id (int): Courier worker ID
+
+       Returns:
+           JsonResponse: Error details if validation fails
+           HttpResponse: Success response if valid
+       """
+
     compensation_str = request.POST.get('compensation', '0')
     success, error = add_courier_compensation(c_id, compensation_str)
     if not success:
@@ -108,6 +184,16 @@ def courier_compensation(request, c_id):
 @user_passes_test(is_support_worker)
 @csrf_exempt
 def client_compensation(request, c_id):
+    """Handle AJAX request for client compensation.
+
+        Args:
+            request (HttpRequest): POST request with compensation amount
+            c_id (int): Client ID
+
+        Returns:
+            JsonResponse: Error details if validation fails
+            HttpResponse: Success response if valid
+        """
     compensation_str = request.POST.get('compensation', '0')
     success, error = add_client_compensation(c_id, compensation_str)
     if not success:
@@ -118,6 +204,19 @@ def client_compensation(request, c_id):
 @user_passes_test(is_support_worker)
 @csrf_exempt
 def confirm_order_and_delivery(request, d_id):
+    """Recreate order and delivery with modified products.
+
+        Args:
+            request (HttpRequest): POST with product quantities and delivery details
+            d_id (int): Original delivery ID
+
+        Returns:
+            HttpResponse: Error message if validation fails
+            HttpResponse: Success confirmation if valid
+
+        Raises:
+            Exception: Generic error if recreation fails
+        """
     if request.method != "POST":
         return HttpResponse("Invalid request method", status=405)
 

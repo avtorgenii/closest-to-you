@@ -9,11 +9,13 @@ from shop.forms import LoginUserForm
 
 
 class LoginUser(LoginView):
+    """Handles user login. Redirects to appropriate dashboard based on user type (client/support worker)."""
     form_class = LoginUserForm
     template_name = 'shop/users/login.html'
     extra_context = {'title': 'Authorization'}
 
     def get_success_url(self):
+        """Determines where to redirect after successful login based on user's profile type."""
         # Get the user who just logged in
         user = self.request.user
 
@@ -31,4 +33,5 @@ class LoginUser(LoginView):
 
 
 def home(request):
+    """Displays the main homepage."""
     return render(request, 'shop/users/index.html')

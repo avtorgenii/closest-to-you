@@ -18,6 +18,8 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
+    path('admin/doc/', include('django.contrib.admindocs.urls')),  # for docs
     path('admin/', admin.site.urls),
     path('', include('shop.urls')),
+
 ]

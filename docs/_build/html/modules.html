@@ -1,0 +1,421 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>closest_to_you &mdash; closest-to-you 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=8d563738"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="closest_to_you package" href="closest_to_you.html" />
+    <link rel="prev" title="closest-to-you documentation" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            closest-to-you
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">closest_to_you</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="closest_to_you.html">closest_to_you package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manage.html">manage module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shop.html">shop package</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">closest-to-you</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">closest_to_you</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/modules.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="closest-to-you">
+<h1>closest_to_you<a class="headerlink" href="#closest-to-you" title="Link to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="closest_to_you.html">closest_to_you package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="closest_to_you.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="closest_to_you.html#module-closest_to_you.asgi">closest_to_you.asgi module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="closest_to_you.html#module-closest_to_you.settings">closest_to_you.settings module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="closest_to_you.html#module-closest_to_you.urls">closest_to_you.urls module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="closest_to_you.html#module-closest_to_you.wsgi">closest_to_you.wsgi module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="closest_to_you.html#module-closest_to_you">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="manage.html">manage module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="manage.html#manage.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="shop.html">shop package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="shop.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="shop.migrations.html">shop.migrations package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="shop.migrations.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.migrations.html#module-shop.migrations.0001_initial">shop.migrations.0001_initial module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.migrations.html#module-shop.migrations.0002_alter_order_total_price">shop.migrations.0002_alter_order_total_price module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.migrations.html#module-shop.migrations.0003_client_compensations_and_more">shop.migrations.0003_client_compensations_and_more module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.migrations.html#module-shop.migrations">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="shop.services.html">shop.services package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="shop.services.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.services.html#module-shop.services.workers">shop.services.workers module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.services.html#module-shop.services">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="shop.views.html">shop.views package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="shop.views.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.views.html#module-shop.views.clients">shop.views.clients module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.views.html#module-shop.views.users">shop.views.users module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.views.html#module-shop.views.workers">shop.views.workers module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.views.html#module-shop.views">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="shop.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shop.html#module-shop.admin">shop.admin module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shop.html#module-shop.apps">shop.apps module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="shop.html#shop.apps.ShopConfig"><code class="docutils literal notranslate"><span class="pre">ShopConfig</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.apps.ShopConfig.default_auto_field"><code class="docutils literal notranslate"><span class="pre">ShopConfig.default_auto_field</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.apps.ShopConfig.name"><code class="docutils literal notranslate"><span class="pre">ShopConfig.name</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="shop.html#module-shop.forms">shop.forms module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="shop.html#shop.forms.LoginUserForm"><code class="docutils literal notranslate"><span class="pre">LoginUserForm</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.forms.LoginUserForm.Meta"><code class="docutils literal notranslate"><span class="pre">LoginUserForm.Meta</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.forms.LoginUserForm.base_fields"><code class="docutils literal notranslate"><span class="pre">LoginUserForm.base_fields</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.forms.LoginUserForm.declared_fields"><code class="docutils literal notranslate"><span class="pre">LoginUserForm.declared_fields</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.forms.LoginUserForm.media"><code class="docutils literal notranslate"><span class="pre">LoginUserForm.media</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="shop.html#module-shop.models">shop.models module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="shop.html#shop.models.Address"><code class="docutils literal notranslate"><span class="pre">Address</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Address.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">Address.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Address.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">Address.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Address.apartment_number"><code class="docutils literal notranslate"><span class="pre">Address.apartment_number</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Address.city"><code class="docutils literal notranslate"><span class="pre">Address.city</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Address.delivery_set"><code class="docutils literal notranslate"><span class="pre">Address.delivery_set</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Address.house_number"><code class="docutils literal notranslate"><span class="pre">Address.house_number</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Address.id"><code class="docutils literal notranslate"><span class="pre">Address.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Address.objects"><code class="docutils literal notranslate"><span class="pre">Address.objects</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Address.postal_code"><code class="docutils literal notranslate"><span class="pre">Address.postal_code</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Address.street"><code class="docutils literal notranslate"><span class="pre">Address.street</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="shop.html#shop.models.Client"><code class="docutils literal notranslate"><span class="pre">Client</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Client.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">Client.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Client.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">Client.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Client.compensations"><code class="docutils literal notranslate"><span class="pre">Client.compensations</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Client.complaint_set"><code class="docutils literal notranslate"><span class="pre">Client.complaint_set</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Client.id"><code class="docutils literal notranslate"><span class="pre">Client.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Client.loyalty_points"><code class="docutils literal notranslate"><span class="pre">Client.loyalty_points</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Client.objects"><code class="docutils literal notranslate"><span class="pre">Client.objects</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Client.orders"><code class="docutils literal notranslate"><span class="pre">Client.orders</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Client.phone_number"><code class="docutils literal notranslate"><span class="pre">Client.phone_number</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Client.user"><code class="docutils literal notranslate"><span class="pre">Client.user</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Client.user_id"><code class="docutils literal notranslate"><span class="pre">Client.user_id</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="shop.html#shop.models.Complaint"><code class="docutils literal notranslate"><span class="pre">Complaint</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Complaint.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">Complaint.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Complaint.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">Complaint.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Complaint.attachment"><code class="docutils literal notranslate"><span class="pre">Complaint.attachment</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Complaint.client"><code class="docutils literal notranslate"><span class="pre">Complaint.client</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Complaint.client_id"><code class="docutils literal notranslate"><span class="pre">Complaint.client_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Complaint.complaint_type"><code class="docutils literal notranslate"><span class="pre">Complaint.complaint_type</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Complaint.complaint_type_id"><code class="docutils literal notranslate"><span class="pre">Complaint.complaint_type_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Complaint.description"><code class="docutils literal notranslate"><span class="pre">Complaint.description</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Complaint.get_absolute_url"><code class="docutils literal notranslate"><span class="pre">Complaint.get_absolute_url()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Complaint.get_next_by_submission_date"><code class="docutils literal notranslate"><span class="pre">Complaint.get_next_by_submission_date()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Complaint.get_previous_by_submission_date"><code class="docutils literal notranslate"><span class="pre">Complaint.get_previous_by_submission_date()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Complaint.id"><code class="docutils literal notranslate"><span class="pre">Complaint.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Complaint.objects"><code class="docutils literal notranslate"><span class="pre">Complaint.objects</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Complaint.order"><code class="docutils literal notranslate"><span class="pre">Complaint.order</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Complaint.order_id"><code class="docutils literal notranslate"><span class="pre">Complaint.order_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Complaint.resolution"><code class="docutils literal notranslate"><span class="pre">Complaint.resolution</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Complaint.resolution_date"><code class="docutils literal notranslate"><span class="pre">Complaint.resolution_date</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Complaint.submission_date"><code class="docutils literal notranslate"><span class="pre">Complaint.submission_date</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Complaint.title"><code class="docutils literal notranslate"><span class="pre">Complaint.title</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Complaint.worker"><code class="docutils literal notranslate"><span class="pre">Complaint.worker</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Complaint.worker_id"><code class="docutils literal notranslate"><span class="pre">Complaint.worker_id</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="shop.html#shop.models.ComplaintType"><code class="docutils literal notranslate"><span class="pre">ComplaintType</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.ComplaintType.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">ComplaintType.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.ComplaintType.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">ComplaintType.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.ComplaintType.complaint_set"><code class="docutils literal notranslate"><span class="pre">ComplaintType.complaint_set</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.ComplaintType.id"><code class="docutils literal notranslate"><span class="pre">ComplaintType.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.ComplaintType.name"><code class="docutils literal notranslate"><span class="pre">ComplaintType.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.ComplaintType.objects"><code class="docutils literal notranslate"><span class="pre">ComplaintType.objects</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="shop.html#shop.models.Delivery"><code class="docutils literal notranslate"><span class="pre">Delivery</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Delivery.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">Delivery.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Delivery.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">Delivery.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Delivery.address"><code class="docutils literal notranslate"><span class="pre">Delivery.address</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Delivery.address_id"><code class="docutils literal notranslate"><span class="pre">Delivery.address_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Delivery.arrived_time"><code class="docutils literal notranslate"><span class="pre">Delivery.arrived_time</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Delivery.deliverer"><code class="docutils literal notranslate"><span class="pre">Delivery.deliverer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Delivery.deliverer_id"><code class="docutils literal notranslate"><span class="pre">Delivery.deliverer_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Delivery.delivery_leave_place"><code class="docutils literal notranslate"><span class="pre">Delivery.delivery_leave_place</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Delivery.delivery_leave_place_id"><code class="docutils literal notranslate"><span class="pre">Delivery.delivery_leave_place_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Delivery.delivery_stage"><code class="docutils literal notranslate"><span class="pre">Delivery.delivery_stage</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Delivery.delivery_stage_id"><code class="docutils literal notranslate"><span class="pre">Delivery.delivery_stage_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Delivery.get_absolute_url"><code class="docutils literal notranslate"><span class="pre">Delivery.get_absolute_url()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Delivery.get_next_by_planned_time"><code class="docutils literal notranslate"><span class="pre">Delivery.get_next_by_planned_time()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Delivery.get_previous_by_planned_time"><code class="docutils literal notranslate"><span class="pre">Delivery.get_previous_by_planned_time()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Delivery.id"><code class="docutils literal notranslate"><span class="pre">Delivery.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Delivery.incidents"><code class="docutils literal notranslate"><span class="pre">Delivery.incidents</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Delivery.objects"><code class="docutils literal notranslate"><span class="pre">Delivery.objects</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Delivery.order"><code class="docutils literal notranslate"><span class="pre">Delivery.order</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Delivery.order_id"><code class="docutils literal notranslate"><span class="pre">Delivery.order_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Delivery.planned_time"><code class="docutils literal notranslate"><span class="pre">Delivery.planned_time</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="shop.html#shop.models.DeliveryLeavePlace"><code class="docutils literal notranslate"><span class="pre">DeliveryLeavePlace</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.DeliveryLeavePlace.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">DeliveryLeavePlace.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.DeliveryLeavePlace.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">DeliveryLeavePlace.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.DeliveryLeavePlace.delivery_set"><code class="docutils literal notranslate"><span class="pre">DeliveryLeavePlace.delivery_set</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.DeliveryLeavePlace.id"><code class="docutils literal notranslate"><span class="pre">DeliveryLeavePlace.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.DeliveryLeavePlace.name"><code class="docutils literal notranslate"><span class="pre">DeliveryLeavePlace.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.DeliveryLeavePlace.objects"><code class="docutils literal notranslate"><span class="pre">DeliveryLeavePlace.objects</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="shop.html#shop.models.DeliveryStage"><code class="docutils literal notranslate"><span class="pre">DeliveryStage</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.DeliveryStage.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">DeliveryStage.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.DeliveryStage.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">DeliveryStage.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.DeliveryStage.delivery_set"><code class="docutils literal notranslate"><span class="pre">DeliveryStage.delivery_set</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.DeliveryStage.id"><code class="docutils literal notranslate"><span class="pre">DeliveryStage.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.DeliveryStage.name"><code class="docutils literal notranslate"><span class="pre">DeliveryStage.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.DeliveryStage.objects"><code class="docutils literal notranslate"><span class="pre">DeliveryStage.objects</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="shop.html#shop.models.Incident"><code class="docutils literal notranslate"><span class="pre">Incident</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Incident.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">Incident.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Incident.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">Incident.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Incident.date"><code class="docutils literal notranslate"><span class="pre">Incident.date</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Incident.deliverer"><code class="docutils literal notranslate"><span class="pre">Incident.deliverer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Incident.deliverer_compensation"><code class="docutils literal notranslate"><span class="pre">Incident.deliverer_compensation</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Incident.deliverer_id"><code class="docutils literal notranslate"><span class="pre">Incident.deliverer_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Incident.delivery"><code class="docutils literal notranslate"><span class="pre">Incident.delivery</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Incident.delivery_id"><code class="docutils literal notranslate"><span class="pre">Incident.delivery_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Incident.description"><code class="docutils literal notranslate"><span class="pre">Incident.description</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Incident.get_next_by_date"><code class="docutils literal notranslate"><span class="pre">Incident.get_next_by_date()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Incident.get_previous_by_date"><code class="docutils literal notranslate"><span class="pre">Incident.get_previous_by_date()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Incident.id"><code class="docutils literal notranslate"><span class="pre">Incident.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Incident.objects"><code class="docutils literal notranslate"><span class="pre">Incident.objects</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Incident.resolution"><code class="docutils literal notranslate"><span class="pre">Incident.resolution</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Incident.support_worker"><code class="docutils literal notranslate"><span class="pre">Incident.support_worker</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Incident.support_worker_id"><code class="docutils literal notranslate"><span class="pre">Incident.support_worker_id</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="shop.html#shop.models.Order"><code class="docutils literal notranslate"><span class="pre">Order</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Order.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">Order.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Order.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">Order.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Order.client"><code class="docutils literal notranslate"><span class="pre">Order.client</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Order.client_id"><code class="docutils literal notranslate"><span class="pre">Order.client_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Order.complaint_set"><code class="docutils literal notranslate"><span class="pre">Order.complaint_set</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Order.delivery"><code class="docutils literal notranslate"><span class="pre">Order.delivery</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Order.delivery_price"><code class="docutils literal notranslate"><span class="pre">Order.delivery_price</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Order.get_next_by_order_date"><code class="docutils literal notranslate"><span class="pre">Order.get_next_by_order_date()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Order.get_previous_by_order_date"><code class="docutils literal notranslate"><span class="pre">Order.get_previous_by_order_date()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Order.id"><code class="docutils literal notranslate"><span class="pre">Order.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Order.objects"><code class="docutils literal notranslate"><span class="pre">Order.objects</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Order.order_date"><code class="docutils literal notranslate"><span class="pre">Order.order_date</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Order.order_products"><code class="docutils literal notranslate"><span class="pre">Order.order_products</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Order.payment_set"><code class="docutils literal notranslate"><span class="pre">Order.payment_set</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Order.products"><code class="docutils literal notranslate"><span class="pre">Order.products</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Order.total_price"><code class="docutils literal notranslate"><span class="pre">Order.total_price</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Order.update_total_price"><code class="docutils literal notranslate"><span class="pre">Order.update_total_price()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="shop.html#shop.models.OrderProduct"><code class="docutils literal notranslate"><span class="pre">OrderProduct</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.OrderProduct.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">OrderProduct.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.OrderProduct.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">OrderProduct.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.OrderProduct.id"><code class="docutils literal notranslate"><span class="pre">OrderProduct.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.OrderProduct.objects"><code class="docutils literal notranslate"><span class="pre">OrderProduct.objects</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.OrderProduct.order"><code class="docutils literal notranslate"><span class="pre">OrderProduct.order</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.OrderProduct.order_id"><code class="docutils literal notranslate"><span class="pre">OrderProduct.order_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.OrderProduct.product"><code class="docutils literal notranslate"><span class="pre">OrderProduct.product</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.OrderProduct.product_id"><code class="docutils literal notranslate"><span class="pre">OrderProduct.product_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.OrderProduct.quantity"><code class="docutils literal notranslate"><span class="pre">OrderProduct.quantity</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="shop.html#shop.models.Payment"><code class="docutils literal notranslate"><span class="pre">Payment</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Payment.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">Payment.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Payment.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">Payment.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Payment.id"><code class="docutils literal notranslate"><span class="pre">Payment.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Payment.objects"><code class="docutils literal notranslate"><span class="pre">Payment.objects</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Payment.order"><code class="docutils literal notranslate"><span class="pre">Payment.order</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Payment.order_id"><code class="docutils literal notranslate"><span class="pre">Payment.order_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Payment.payment_type"><code class="docutils literal notranslate"><span class="pre">Payment.payment_type</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Payment.payment_type_id"><code class="docutils literal notranslate"><span class="pre">Payment.payment_type_id</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="shop.html#shop.models.PaymentType"><code class="docutils literal notranslate"><span class="pre">PaymentType</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.PaymentType.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">PaymentType.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.PaymentType.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">PaymentType.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.PaymentType.id"><code class="docutils literal notranslate"><span class="pre">PaymentType.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.PaymentType.name"><code class="docutils literal notranslate"><span class="pre">PaymentType.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.PaymentType.objects"><code class="docutils literal notranslate"><span class="pre">PaymentType.objects</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.PaymentType.payment_set"><code class="docutils literal notranslate"><span class="pre">PaymentType.payment_set</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="shop.html#shop.models.Product"><code class="docutils literal notranslate"><span class="pre">Product</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Product.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">Product.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Product.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">Product.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Product.above_18_years"><code class="docutils literal notranslate"><span class="pre">Product.above_18_years</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Product.category"><code class="docutils literal notranslate"><span class="pre">Product.category</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Product.category_id"><code class="docutils literal notranslate"><span class="pre">Product.category_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Product.description"><code class="docutils literal notranslate"><span class="pre">Product.description</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Product.discount"><code class="docutils literal notranslate"><span class="pre">Product.discount</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Product.id"><code class="docutils literal notranslate"><span class="pre">Product.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Product.image"><code class="docutils literal notranslate"><span class="pre">Product.image</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Product.name"><code class="docutils literal notranslate"><span class="pre">Product.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Product.objects"><code class="docutils literal notranslate"><span class="pre">Product.objects</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Product.orderproduct_set"><code class="docutils literal notranslate"><span class="pre">Product.orderproduct_set</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Product.orders"><code class="docutils literal notranslate"><span class="pre">Product.orders</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Product.price"><code class="docutils literal notranslate"><span class="pre">Product.price</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Product.vat"><code class="docutils literal notranslate"><span class="pre">Product.vat</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Product.vat_id"><code class="docutils literal notranslate"><span class="pre">Product.vat_id</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="shop.html#shop.models.ProductCategory"><code class="docutils literal notranslate"><span class="pre">ProductCategory</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.ProductCategory.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">ProductCategory.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.ProductCategory.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">ProductCategory.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.ProductCategory.id"><code class="docutils literal notranslate"><span class="pre">ProductCategory.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.ProductCategory.name"><code class="docutils literal notranslate"><span class="pre">ProductCategory.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.ProductCategory.objects"><code class="docutils literal notranslate"><span class="pre">ProductCategory.objects</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.ProductCategory.products"><code class="docutils literal notranslate"><span class="pre">ProductCategory.products</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="shop.html#shop.models.VAT"><code class="docutils literal notranslate"><span class="pre">VAT</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.VAT.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">VAT.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.VAT.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">VAT.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.VAT.id"><code class="docutils literal notranslate"><span class="pre">VAT.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.VAT.objects"><code class="docutils literal notranslate"><span class="pre">VAT.objects</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.VAT.product_set"><code class="docutils literal notranslate"><span class="pre">VAT.product_set</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.VAT.value"><code class="docutils literal notranslate"><span class="pre">VAT.value</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="shop.html#shop.models.Worker"><code class="docutils literal notranslate"><span class="pre">Worker</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Worker.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">Worker.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Worker.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">Worker.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Worker.complaint_set"><code class="docutils literal notranslate"><span class="pre">Worker.complaint_set</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Worker.deliverer_incidents"><code class="docutils literal notranslate"><span class="pre">Worker.deliverer_incidents</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Worker.deliveries"><code class="docutils literal notranslate"><span class="pre">Worker.deliveries</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Worker.fire_date"><code class="docutils literal notranslate"><span class="pre">Worker.fire_date</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Worker.id"><code class="docutils literal notranslate"><span class="pre">Worker.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Worker.objects"><code class="docutils literal notranslate"><span class="pre">Worker.objects</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Worker.phone_number"><code class="docutils literal notranslate"><span class="pre">Worker.phone_number</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Worker.role"><code class="docutils literal notranslate"><span class="pre">Worker.role</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Worker.role_id"><code class="docutils literal notranslate"><span class="pre">Worker.role_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Worker.salary"><code class="docutils literal notranslate"><span class="pre">Worker.salary</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Worker.support_worker_incidents"><code class="docutils literal notranslate"><span class="pre">Worker.support_worker_incidents</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Worker.user"><code class="docutils literal notranslate"><span class="pre">Worker.user</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.Worker.user_id"><code class="docutils literal notranslate"><span class="pre">Worker.user_id</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="shop.html#shop.models.WorkerRole"><code class="docutils literal notranslate"><span class="pre">WorkerRole</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.WorkerRole.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">WorkerRole.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.WorkerRole.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">WorkerRole.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.WorkerRole.id"><code class="docutils literal notranslate"><span class="pre">WorkerRole.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.WorkerRole.name"><code class="docutils literal notranslate"><span class="pre">WorkerRole.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.WorkerRole.objects"><code class="docutils literal notranslate"><span class="pre">WorkerRole.objects</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.html#shop.models.WorkerRole.workers"><code class="docutils literal notranslate"><span class="pre">WorkerRole.workers</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="shop.html#module-shop.tests">shop.tests module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shop.html#module-shop.urls">shop.urls module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shop.html#module-shop">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="closest-to-you documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="closest_to_you.html" class="btn btn-neutral float-right" title="closest_to_you package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Aleksandr Shestakov.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

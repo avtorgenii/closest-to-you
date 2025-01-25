@@ -6,6 +6,13 @@ from shop.models import Incident, Order, OrderProduct, Delivery, Worker, Client,
 
 
 def decline_complaint_service(complaint, worker, resolution_text):
+    """Update complaint with decline resolution.
+
+        Args:
+            complaint (Complaint): Complaint object to update
+            worker (Worker): Support worker resolving complaint
+            resolution_text (str): Explanation of decline reason
+        """
     complaint.resolution_date = timezone.now()
     complaint.resolution = resolution_text
     complaint.worker = worker
@@ -13,6 +20,15 @@ def decline_complaint_service(complaint, worker, resolution_text):
 
 
 def accept_complaint_service(complaint, worker, compensation_str, is_refund):
+    """Process complaint acceptance with compensation.
+
+        Args:
+            complaint (Complaint): Complaint object to resolve
+            worker (Worker): Support worker handling complaint
+            compensation_str (str): String representation of compensation amount
+            is_refund (bool): Whether to issue full order refund
+        """
+
     try:
         compensation = Decimal(compensation_str)
     except InvalidOperation:
@@ -33,6 +49,12 @@ def accept_complaint_service(complaint, worker, compensation_str, is_refund):
 
 
 def create_incident(delivery, support_worker):
+    """Create new delivery incident record.
+
+        Args:
+            delivery (Delivery): Delivery object to associate
+            support_worker (Worker): Worker creating incident
+        """
     Incident.objects.create(
         description="Incident",
         delivery=delivery,
@@ -42,6 +64,15 @@ def create_incident(delivery, support_worker):
 
 
 def add_courier_compensation(courier_id, compensation_str):
+    """Add compensation to courier's latest incident.
+
+        Args:
+            courier_id (int): ID of courier worker
+            compensation_str (str): String representation of amount
+
+        Returns:
+            tuple: (success: bool, error: str|None)
+        """
     try:
         compensation = Decimal(compensation_str)
         if compensation < 0:
@@ -60,6 +91,15 @@ def add_courier_compensation(courier_id, compensation_str):
 
 
 def add_client_compensation(client_id, compensation_str):
+    """Add compensation to client's balance.
+
+        Args:
+            client_id (int): ID of client
+            compensation_str (str): String representation of amount
+
+        Returns:
+            tuple: (success: bool, error: str|None)
+        """
     try:
         compensation = Decimal(compensation_str)
         if compensation < 0:
@@ -76,6 +116,22 @@ def add_client_compensation(client_id, compensation_str):
 @transaction.atomic
 def recreate_order_and_delivery(old_delivery_id, planned_time_str, same_deliverer, deliverer_id, client_id,
                                 products_data):
+    """Recreate order and delivery with new parameters.
+
+       Args:
+           old_delivery_id (int): Original delivery ID to reference
+           planned_time_str (str): ISO format datetime string for new delivery
+           same_deliverer (bool): Keep original courier
+           deliverer_id (int): New courier ID if changing
+           client_id (int): Client ID for new order
+           products_data (dict): {product_id: quantity} mapping
+
+       Returns:
+           Delivery: Newly created delivery object
+
+       Raises:
+           ValidationError: If any data validation fails
+       """
     old_delivery = Delivery.objects.get(pk=old_delivery_id)
     planned_time = datetime.fromisoformat(planned_time_str) if planned_time_str else None
 

@@ -1,0 +1,279 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>shop.services.workers &mdash; closest-to-you 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            closest-to-you
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">closest_to_you</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">closest-to-you</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">shop.services.workers</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for shop.services.workers</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">decimal</span><span class="w"> </span><span class="kn">import</span> <span class="n">Decimal</span><span class="p">,</span> <span class="n">InvalidOperation</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.db</span><span class="w"> </span><span class="kn">import</span> <span class="n">transaction</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">timezone</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">shop.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Incident</span><span class="p">,</span> <span class="n">Order</span><span class="p">,</span> <span class="n">OrderProduct</span><span class="p">,</span> <span class="n">Delivery</span><span class="p">,</span> <span class="n">Worker</span><span class="p">,</span> <span class="n">Client</span><span class="p">,</span> <span class="n">Product</span>
+
+
+<div class="viewcode-block" id="decline_complaint_service">
+<a class="viewcode-back" href="../../../shop.services.html#shop.services.workers.decline_complaint_service">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">decline_complaint_service</span><span class="p">(</span><span class="n">complaint</span><span class="p">,</span> <span class="n">worker</span><span class="p">,</span> <span class="n">resolution_text</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Update complaint with decline resolution.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            complaint (Complaint): Complaint object to update</span>
+<span class="sd">            worker (Worker): Support worker resolving complaint</span>
+<span class="sd">            resolution_text (str): Explanation of decline reason</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+    <span class="n">complaint</span><span class="o">.</span><span class="n">resolution_date</span> <span class="o">=</span> <span class="n">timezone</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+    <span class="n">complaint</span><span class="o">.</span><span class="n">resolution</span> <span class="o">=</span> <span class="n">resolution_text</span>
+    <span class="n">complaint</span><span class="o">.</span><span class="n">worker</span> <span class="o">=</span> <span class="n">worker</span>
+    <span class="n">complaint</span><span class="o">.</span><span class="n">save</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="accept_complaint_service">
+<a class="viewcode-back" href="../../../shop.services.html#shop.services.workers.accept_complaint_service">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">accept_complaint_service</span><span class="p">(</span><span class="n">complaint</span><span class="p">,</span> <span class="n">worker</span><span class="p">,</span> <span class="n">compensation_str</span><span class="p">,</span> <span class="n">is_refund</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Process complaint acceptance with compensation.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            complaint (Complaint): Complaint object to resolve</span>
+<span class="sd">            worker (Worker): Support worker handling complaint</span>
+<span class="sd">            compensation_str (str): String representation of compensation amount</span>
+<span class="sd">            is_refund (bool): Whether to issue full order refund</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">compensation</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="n">compensation_str</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">InvalidOperation</span><span class="p">:</span>
+        <span class="n">compensation</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="n">complaint</span><span class="o">.</span><span class="n">resolution_date</span> <span class="o">=</span> <span class="n">timezone</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+    <span class="n">complaint</span><span class="o">.</span><span class="n">resolution</span> <span class="o">=</span> <span class="s1">&#39;Accepted&#39;</span>
+    <span class="n">complaint</span><span class="o">.</span><span class="n">worker</span> <span class="o">=</span> <span class="n">worker</span>
+
+    <span class="n">refund</span> <span class="o">=</span> <span class="n">complaint</span><span class="o">.</span><span class="n">order</span><span class="o">.</span><span class="n">total_price</span> <span class="k">if</span> <span class="n">is_refund</span> <span class="k">else</span> <span class="n">Decimal</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">total_compensation</span> <span class="o">=</span> <span class="n">compensation</span> <span class="o">+</span> <span class="n">refund</span>
+
+    <span class="n">client</span> <span class="o">=</span> <span class="n">complaint</span><span class="o">.</span><span class="n">client</span>
+    <span class="n">client</span><span class="o">.</span><span class="n">compensations</span> <span class="o">+=</span> <span class="n">total_compensation</span>
+    <span class="n">client</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+
+    <span class="n">complaint</span><span class="o">.</span><span class="n">save</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="create_incident">
+<a class="viewcode-back" href="../../../shop.services.html#shop.services.workers.create_incident">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_incident</span><span class="p">(</span><span class="n">delivery</span><span class="p">,</span> <span class="n">support_worker</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create new delivery incident record.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            delivery (Delivery): Delivery object to associate</span>
+<span class="sd">            support_worker (Worker): Worker creating incident</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+    <span class="n">Incident</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Incident&quot;</span><span class="p">,</span>
+        <span class="n">delivery</span><span class="o">=</span><span class="n">delivery</span><span class="p">,</span>
+        <span class="n">deliverer</span><span class="o">=</span><span class="n">delivery</span><span class="o">.</span><span class="n">deliverer</span><span class="p">,</span>
+        <span class="n">support_worker</span><span class="o">=</span><span class="n">support_worker</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="add_courier_compensation">
+<a class="viewcode-back" href="../../../shop.services.html#shop.services.workers.add_courier_compensation">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">add_courier_compensation</span><span class="p">(</span><span class="n">courier_id</span><span class="p">,</span> <span class="n">compensation_str</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Add compensation to courier&#39;s latest incident.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            courier_id (int): ID of courier worker</span>
+<span class="sd">            compensation_str (str): String representation of amount</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            tuple: (success: bool, error: str|None)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">compensation</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="n">compensation_str</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">compensation</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Compensation cannot be negative.&quot;</span>
+    <span class="k">except</span> <span class="n">InvalidOperation</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Invalid compensation value.&quot;</span>
+
+    <span class="n">courier</span> <span class="o">=</span> <span class="n">Worker</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">courier_id</span><span class="p">)</span>
+    <span class="n">incident</span> <span class="o">=</span> <span class="n">courier</span><span class="o">.</span><span class="n">deliverer_incidents</span><span class="o">.</span><span class="n">last</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">incident</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;No incident found for courier.&quot;</span>
+
+    <span class="n">incident</span><span class="o">.</span><span class="n">deliverer_compensation</span> <span class="o">+=</span> <span class="n">compensation</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+    <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">None</span></div>
+
+
+
+<div class="viewcode-block" id="add_client_compensation">
+<a class="viewcode-back" href="../../../shop.services.html#shop.services.workers.add_client_compensation">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">add_client_compensation</span><span class="p">(</span><span class="n">client_id</span><span class="p">,</span> <span class="n">compensation_str</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Add compensation to client&#39;s balance.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            client_id (int): ID of client</span>
+<span class="sd">            compensation_str (str): String representation of amount</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            tuple: (success: bool, error: str|None)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">compensation</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="n">compensation_str</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">compensation</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Compensation cannot be negative.&quot;</span>
+    <span class="k">except</span> <span class="n">InvalidOperation</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Invalid compensation value.&quot;</span>
+
+    <span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">client_id</span><span class="p">)</span>
+    <span class="n">client</span><span class="o">.</span><span class="n">compensations</span> <span class="o">+=</span> <span class="n">compensation</span>
+    <span class="n">client</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+    <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">None</span></div>
+
+
+
+<div class="viewcode-block" id="recreate_order_and_delivery">
+<a class="viewcode-back" href="../../../shop.services.html#shop.services.workers.recreate_order_and_delivery">[docs]</a>
+<span class="nd">@transaction</span><span class="o">.</span><span class="n">atomic</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">recreate_order_and_delivery</span><span class="p">(</span><span class="n">old_delivery_id</span><span class="p">,</span> <span class="n">planned_time_str</span><span class="p">,</span> <span class="n">same_deliverer</span><span class="p">,</span> <span class="n">deliverer_id</span><span class="p">,</span> <span class="n">client_id</span><span class="p">,</span>
+                                <span class="n">products_data</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Recreate order and delivery with new parameters.</span>
+
+<span class="sd">       Args:</span>
+<span class="sd">           old_delivery_id (int): Original delivery ID to reference</span>
+<span class="sd">           planned_time_str (str): ISO format datetime string for new delivery</span>
+<span class="sd">           same_deliverer (bool): Keep original courier</span>
+<span class="sd">           deliverer_id (int): New courier ID if changing</span>
+<span class="sd">           client_id (int): Client ID for new order</span>
+<span class="sd">           products_data (dict): {product_id: quantity} mapping</span>
+
+<span class="sd">       Returns:</span>
+<span class="sd">           Delivery: Newly created delivery object</span>
+
+<span class="sd">       Raises:</span>
+<span class="sd">           ValidationError: If any data validation fails</span>
+<span class="sd">       &quot;&quot;&quot;</span>
+    <span class="n">old_delivery</span> <span class="o">=</span> <span class="n">Delivery</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">old_delivery_id</span><span class="p">)</span>
+    <span class="n">planned_time</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">fromisoformat</span><span class="p">(</span><span class="n">planned_time_str</span><span class="p">)</span> <span class="k">if</span> <span class="n">planned_time_str</span> <span class="k">else</span> <span class="kc">None</span>
+
+    <span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">client_id</span><span class="p">)</span>
+    <span class="n">order</span> <span class="o">=</span> <span class="n">Order</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">delivery_price</span><span class="o">=</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">),</span> <span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">product_id</span><span class="p">,</span> <span class="n">quantity</span> <span class="ow">in</span> <span class="n">products_data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">product</span> <span class="o">=</span> <span class="n">Product</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">product_id</span><span class="p">)</span>
+        <span class="n">OrderProduct</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">product</span><span class="o">=</span><span class="n">product</span><span class="p">,</span> <span class="n">quantity</span><span class="o">=</span><span class="n">quantity</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">)</span>
+
+    <span class="n">order</span><span class="o">.</span><span class="n">update_total_price</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">same_deliverer</span><span class="p">:</span>
+        <span class="n">deliverer</span> <span class="o">=</span> <span class="n">old_delivery</span><span class="o">.</span><span class="n">deliverer</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">deliverer</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="n">new_delivery</span> <span class="o">=</span> <span class="n">Delivery</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+        <span class="n">planned_time</span><span class="o">=</span><span class="n">planned_time</span><span class="p">,</span>
+        <span class="n">deliverer</span><span class="o">=</span><span class="n">deliverer</span><span class="p">,</span>
+        <span class="n">address</span><span class="o">=</span><span class="n">old_delivery</span><span class="o">.</span><span class="n">address</span><span class="p">,</span>
+        <span class="n">delivery_leave_place</span><span class="o">=</span><span class="n">old_delivery</span><span class="o">.</span><span class="n">delivery_leave_place</span><span class="p">,</span>
+        <span class="n">order</span><span class="o">=</span><span class="n">order</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">new_delivery</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Aleksandr Shestakov.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

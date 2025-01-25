@@ -1,0 +1,335 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>shop.views package &mdash; closest-to-you 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=8d563738"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="shop.services package" href="shop.services.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            closest-to-you
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">closest_to_you</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="closest_to_you.html">closest_to_you package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manage.html">manage module</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="shop.html">shop package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="shop.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="shop.migrations.html">shop.migrations package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="shop.services.html">shop.services package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">shop.views package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="shop.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="shop.html#module-shop.admin">shop.admin module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="shop.html#module-shop.apps">shop.apps module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="shop.html#module-shop.forms">shop.forms module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="shop.html#module-shop.models">shop.models module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="shop.html#module-shop.tests">shop.tests module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="shop.html#module-shop.urls">shop.urls module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="shop.html#module-shop">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">closest-to-you</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">closest_to_you</a></li>
+          <li class="breadcrumb-item"><a href="shop.html">shop package</a></li>
+      <li class="breadcrumb-item active">shop.views package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/shop.views.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="shop-views-package">
+<h1>shop.views package<a class="headerlink" href="#shop-views-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-shop.views.clients">
+<span id="shop-views-clients-module"></span><h2>shop.views.clients module<a class="headerlink" href="#module-shop.views.clients" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="shop.views.clients.client_basket">
+<span class="sig-prename descclassname"><span class="pre">shop.views.clients.</span></span><span class="sig-name descname"><span class="pre">client_basket</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/shop/views/clients.html#client_basket"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#shop.views.clients.client_basket" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="shop.views.clients.client_checkout">
+<span class="sig-prename descclassname"><span class="pre">shop.views.clients.</span></span><span class="sig-name descname"><span class="pre">client_checkout</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/shop/views/clients.html#client_checkout"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#shop.views.clients.client_checkout" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="shop.views.clients.client_finalize_purchase">
+<span class="sig-prename descclassname"><span class="pre">shop.views.clients.</span></span><span class="sig-name descname"><span class="pre">client_finalize_purchase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/shop/views/clients.html#client_finalize_purchase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#shop.views.clients.client_finalize_purchase" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="shop.views.clients.process_payment">
+<span class="sig-prename descclassname"><span class="pre">shop.views.clients.</span></span><span class="sig-name descname"><span class="pre">process_payment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/shop/views/clients.html#process_payment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#shop.views.clients.process_payment" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-shop.views.users">
+<span id="shop-views-users-module"></span><h2>shop.views.users module<a class="headerlink" href="#module-shop.views.users" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="shop.views.users.LoginUser">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">shop.views.users.</span></span><span class="sig-name descname"><span class="pre">LoginUser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/shop/views/users.html#LoginUser"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#shop.views.users.LoginUser" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">LoginView</span></code></p>
+<p>Handles user login. Redirects to appropriate dashboard based on user type (client/support worker).</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="shop.views.users.LoginUser.extra_context">
+<span class="sig-name descname"><span class="pre">extra_context</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'title':</span> <span class="pre">'Authorization'}</span></em><a class="headerlink" href="#shop.views.users.LoginUser.extra_context" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="shop.views.users.LoginUser.form_class">
+<span class="sig-name descname"><span class="pre">form_class</span></span><a class="headerlink" href="#shop.views.users.LoginUser.form_class" title="Link to this definition"></a></dt>
+<dd><p>alias of <a class="reference internal" href="shop.html#shop.forms.LoginUserForm" title="shop.forms.LoginUserForm"><code class="xref py py-class docutils literal notranslate"><span class="pre">LoginUserForm</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="shop.views.users.LoginUser.get_success_url">
+<span class="sig-name descname"><span class="pre">get_success_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/shop/views/users.html#LoginUser.get_success_url"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#shop.views.users.LoginUser.get_success_url" title="Link to this definition"></a></dt>
+<dd><p>Determines where to redirect after successful login based on user’s profile type.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="shop.views.users.LoginUser.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'shop/users/login.html'</span></em><a class="headerlink" href="#shop.views.users.LoginUser.template_name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="shop.views.users.home">
+<span class="sig-prename descclassname"><span class="pre">shop.views.users.</span></span><span class="sig-name descname"><span class="pre">home</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/shop/views/users.html#home"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#shop.views.users.home" title="Link to this definition"></a></dt>
+<dd><p>Displays the main homepage.</p>
+</dd></dl>
+
+</section>
+<section id="module-shop.views.workers">
+<span id="shop-views-workers-module"></span><h2>shop.views.workers module<a class="headerlink" href="#module-shop.views.workers" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="shop.views.workers.accept_complaint">
+<span class="sig-prename descclassname"><span class="pre">shop.views.workers.</span></span><span class="sig-name descname"><span class="pre">accept_complaint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/shop/views/workers.html#accept_complaint"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#shop.views.workers.accept_complaint" title="Link to this definition"></a></dt>
+<dd><p>Accept complaint and apply compensation/refund.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>request (HttpRequest): Contains POST data with compensation details
+c_id (int): Complaint ID to accept</p>
+</dd>
+<dt>Returns:</dt><dd><p>HttpResponseRedirect: Redirect to support dashboard</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="shop.views.workers.client_compensation">
+<span class="sig-prename descclassname"><span class="pre">shop.views.workers.</span></span><span class="sig-name descname"><span class="pre">client_compensation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/shop/views/workers.html#client_compensation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#shop.views.workers.client_compensation" title="Link to this definition"></a></dt>
+<dd><p>Handle AJAX request for client compensation.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>request (HttpRequest): POST request with compensation amount
+c_id (int): Client ID</p>
+</dd>
+<dt>Returns:</dt><dd><p>JsonResponse: Error details if validation fails
+HttpResponse: Success response if valid</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="shop.views.workers.complaint">
+<span class="sig-prename descclassname"><span class="pre">shop.views.workers.</span></span><span class="sig-name descname"><span class="pre">complaint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/shop/views/workers.html#complaint"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#shop.views.workers.complaint" title="Link to this definition"></a></dt>
+<dd><p>Display detailed view of a specific complaint.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>request (HttpRequest): Standard request object
+c_id (int): Complaint ID from URL</p>
+</dd>
+<dt>Returns:</dt><dd><p>HttpResponse: Rendered complaint detail template</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="shop.views.workers.confirm_incident">
+<span class="sig-prename descclassname"><span class="pre">shop.views.workers.</span></span><span class="sig-name descname"><span class="pre">confirm_incident</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/shop/views/workers.html#confirm_incident"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#shop.views.workers.confirm_incident" title="Link to this definition"></a></dt>
+<dd><p>Create new incident record for delivery.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>request (HttpRequest): Unused but required
+d_id (int): Delivery ID to associate with incident</p>
+</dd>
+<dt>Returns:</dt><dd><p>HttpResponse: Plain text OK response</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="shop.views.workers.confirm_order_and_delivery">
+<span class="sig-prename descclassname"><span class="pre">shop.views.workers.</span></span><span class="sig-name descname"><span class="pre">confirm_order_and_delivery</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/shop/views/workers.html#confirm_order_and_delivery"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#shop.views.workers.confirm_order_and_delivery" title="Link to this definition"></a></dt>
+<dd><p>Recreate order and delivery with modified products.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>request (HttpRequest): POST with product quantities and delivery details
+d_id (int): Original delivery ID</p>
+</dd>
+<dt>Returns:</dt><dd><p>HttpResponse: Error message if validation fails
+HttpResponse: Success confirmation if valid</p>
+</dd>
+<dt>Raises:</dt><dd><p>Exception: Generic error if recreation fails</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="shop.views.workers.courier_compensation">
+<span class="sig-prename descclassname"><span class="pre">shop.views.workers.</span></span><span class="sig-name descname"><span class="pre">courier_compensation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/shop/views/workers.html#courier_compensation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#shop.views.workers.courier_compensation" title="Link to this definition"></a></dt>
+<dd><p>Handle AJAX request for courier compensation.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>request (HttpRequest): POST request with compensation amount
+c_id (int): Courier worker ID</p>
+</dd>
+<dt>Returns:</dt><dd><p>JsonResponse: Error details if validation fails
+HttpResponse: Success response if valid</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="shop.views.workers.decline_complaint">
+<span class="sig-prename descclassname"><span class="pre">shop.views.workers.</span></span><span class="sig-name descname"><span class="pre">decline_complaint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/shop/views/workers.html#decline_complaint"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#shop.views.workers.decline_complaint" title="Link to this definition"></a></dt>
+<dd><p>Process complaint decline with resolution text.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>request (HttpRequest): Contains POST data with response
+c_id (int): Complaint ID to decline</p>
+</dd>
+<dt>Returns:</dt><dd><p>HttpResponseRedirect: Redirect to support dashboard</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="shop.views.workers.delivery">
+<span class="sig-prename descclassname"><span class="pre">shop.views.workers.</span></span><span class="sig-name descname"><span class="pre">delivery</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/shop/views/workers.html#delivery"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#shop.views.workers.delivery" title="Link to this definition"></a></dt>
+<dd><p>Display delivery details and related order information.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>request (HttpRequest): Standard request object
+d_id (int): Delivery ID from URL</p>
+</dd>
+<dt>Returns:</dt><dd><p>HttpResponse: Rendered delivery detail template</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="shop.views.workers.is_support_worker">
+<span class="sig-prename descclassname"><span class="pre">shop.views.workers.</span></span><span class="sig-name descname"><span class="pre">is_support_worker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/shop/views/workers.html#is_support_worker"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#shop.views.workers.is_support_worker" title="Link to this definition"></a></dt>
+<dd><p>Check if user is authenticated support worker.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>user (User): Django user object to check</p>
+</dd>
+<dt>Returns:</dt><dd><p>bool: True if valid support worker</p>
+</dd>
+<dt>Raises:</dt><dd><p>PermissionDenied: If user is not worker or doesn’t have Support role</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="shop.views.workers.support_dashboard">
+<span class="sig-prename descclassname"><span class="pre">shop.views.workers.</span></span><span class="sig-name descname"><span class="pre">support_dashboard</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/shop/views/workers.html#support_dashboard"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#shop.views.workers.support_dashboard" title="Link to this definition"></a></dt>
+<dd><p>Display support worker dashboard with recent complaints and deliveries.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>request (HttpRequest): Standard request object</p>
+</dd>
+<dt>Returns:</dt><dd><p>HttpResponse: Rendered dashboard template with context</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-shop.views">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-shop.views" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="shop.services.html" class="btn btn-neutral float-left" title="shop.services package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Aleksandr Shestakov.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_extensions',
     'shop',
+    'model_bakery', # for tests
+    'django.contrib.admindocs' # for docs
 ]
 
 MIDDLEWARE = [
